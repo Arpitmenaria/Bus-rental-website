@@ -1,0 +1,41 @@
+.services-hero {
+  width: 95%;
+  margin: 30px auto;
+  border-radius: 48px;
+  background: linear-gradient(
+      rgba(11, 44, 93, 0.85),
+      rgba(11, 44, 93, 0.85)
+    ),
+    url("/images/45seat.jpeg") center/cover no-repeat;
+  padding: 80px 20px;
+  color: #fff;
+}
+
+.services-hero-content {
+  max-width: 600px;
+}
+
+.services-hero h1 {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.services-hero h2 {
+  font-size: 2.6rem;
+  margin: 12px 0;
+}
+
+.services-hero p {
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .services-hero {
+    border-radius: 28px;
+    padding: 60px 16px;
+  }
+
+  .services-hero h2 {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,73 @@
+/* ===== STATS BANNER WRAP ===== */
+.stats-wrap {
+  width: 100%;
+  margin: 12px 0 32px;
+}
+
+/* ===== BANNER ===== */
+.stats-banner {
+  width: 95%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 18px 12px;
+  background: linear-gradient(90deg, #0b2c5d, #123f8a);
+  border-radius: 40px;           /* capsule look */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 12px;
+  color: #ffffff;
+}
+
+/* ===== ITEM ===== */
+.stat-item {
+  text-align: center;
+  min-width: 120px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* ===== TABLET ===== */
+@media (max-width: 768px) {
+  .stats-banner {
+    flex-wrap: wrap;             /* wraps, not redesigns */
+    gap: 16px;
+    padding: 20px 10px;
+    border-radius: 32px;
+  }
+
+  .stat-value {
+    font-size: 1.6rem;
+  }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 480px) {
+  .stats-banner {
+    width: 96%;
+    border-radius: 28px;
+  }
+
+  .stat-item {
+    flex: 1 1 45%;                /* 2 per row */
+  }
+
+  .stat-value {
+    font-size: 1.4rem;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+  }
+}

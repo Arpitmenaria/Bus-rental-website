@@ -1,0 +1,79 @@
+/* ===== FOOTER ===== */
+.footer {
+  width: 100%;
+  background: #0b2c5d;
+  color: #ffffff;
+  margin-top: 60px;
+}
+
+/* ===== CONTAINER ===== */
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 16px;
+  display: flex;
+  gap: 40px;
+  align-items: stretch;
+}
+
+/* ===== LEFT ===== */
+.footer-left {
+  flex: 1;
+}
+
+.footer-left h3 {
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+}
+
+.footer-left p {
+  margin-bottom: 12px;
+  color: #e0e0e0;
+}
+
+.footer-phone {
+  font-weight: 600;
+}
+
+/* Instagram link */
+.footer-instagram {
+  display: inline-block;
+  margin-top: 10px;
+  color: #ff5a3c;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* ===== RIGHT ===== */
+.footer-right {
+  flex: 1;
+}
+
+.footer-right iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  border: none;
+  border-radius: 20px;
+}
+
+/* ===== BOTTOM ===== */
+.footer-bottom {
+  text-align: center;
+  padding: 14px 10px;
+  background: #09254d;
+  font-size: 0.85rem;
+  color: #cfd6e0;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer-right iframe {
+    min-height: 220px;
+  }
+}
