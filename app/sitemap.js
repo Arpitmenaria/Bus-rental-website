@@ -24,5 +24,10 @@ export default function sitemap() {
       url: `${baseUrl}/contact`,
       lastModified: new Date(),
     },
+    {
+    url: "https://shivshaktitourist.com/bus-rent-in-udaipur",
+    lastModified: new Date(),
+    },
+
   ];
 }
