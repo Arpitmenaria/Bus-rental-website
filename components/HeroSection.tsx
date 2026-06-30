@@ -1,11 +1,81 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { SITE, WA_DEFAULT } from '@/lib/site'
 
+// Three.js canvas — completely excluded from SSR and the initial JS bundle.
+// The dynamic() call creates a separate lazy chunk; it is only fetched after
+// shouldRender3D() confirms the device can handle it.
 const BusScene = dynamic(() => import('@/components/BusScene'), { ssr: false })
+
+// ── Device capability detection ───────────────────────────────────────────────
+// Called client-side only. Returns false → serve the static SVG forever.
+
+function shouldRender3D(): boolean {
+  // Reduced-motion: accessibility preference also signals "save resources"
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false
+
+  // Narrow viewport = almost certainly mobile; skip 3D for battery/perf
+  if (window.innerWidth < 768) return false
+
+  // Low device memory (<4 GB) — Chrome/Edge only; absent in Safari
+  type NavWithMemory = Navigator & { deviceMemory?: number }
+  const mem = (navigator as NavWithMemory).deviceMemory
+  if (typeof mem === 'number' && mem < 4) return false
+
+  // Low CPU core count — heuristic for low-power devices
+  if (typeof navigator.hardwareConcurrency === 'number' && navigator.hardwareConcurrency < 4) return false
+
+  return true
+}
+
+// ── Static hero image (LCP element) ──────────────────────────────────────────
+// Shown immediately on first paint and kept visible until 3D is ready.
+// On mobile / reduced-motion / low-power devices it is the permanent visual.
+//
+// TODO: Replace /hero-bus.svg with a real photograph of your bus for the best
+// possible LCP score. Add the file at /public/hero-bus.jpg (≥1200×750 px,
+// .webp or .jpg). Then replace the <Image> below with:
+//
+//   <Image src="/hero-bus.jpg" alt="ShivShakti luxury bus" fill priority
+//          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 600px"
+//          className="object-cover" />
+//
+// The SVG works as a placeholder and fallback; it has no negative LCP impact
+// because its <Image priority> tag signals the browser to preload it.
+
+function HeroPlaceholder({ visible }: { visible: boolean }) {
+  return (
+    <div
+      className={`absolute inset-0 transition-opacity duration-700 ${visible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+      aria-hidden={!visible}
+    >
+      <div className="relative w-full h-full bg-gradient-to-b from-emerald-950 to-emerald-800">
+        <Image
+          src="/hero-bus.svg"
+          alt="ShivShakti Tourist luxury bus — Rajasthan, India"
+          fill
+          priority          // <-- LCP hint: browser fetches this on first paint
+          unoptimized       // SVGs skip the optimization pipeline
+          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 600px"
+          className="object-contain object-center"
+        />
+      </div>
+    </div>
+  )
+}
+
+// ── Hero stats (below the headline) ──────────────────────────────────────────
+
+const heroStats = [
+  { value: `${SITE.stats.buses}+`,   label: 'Luxury Buses' },
+  { value: String(SITE.stats.years), label: 'Years of Service' },
+  { value: SITE.stats.tourists,      label: 'Happy Tourists' },
+  { value: String(SITE.stats.states),label: 'States Covered' },
+]
 
 const WA_ICON = (
   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -13,25 +83,47 @@ const WA_ICON = (
   </svg>
 )
 
-const heroStats = [
-  { value: `${SITE.stats.buses}+`, label: 'Luxury Buses' },
-  { value: String(SITE.stats.years), label: 'Years of Service' },
-  { value: SITE.stats.tourists, label: 'Happy Tourists' },
-  { value: String(SITE.stats.states), label: 'States Covered' },
-]
+// ── Main component ────────────────────────────────────────────────────────────
 
 export default function HeroSection() {
-  const [scrollProgress, setScrollProgress] = useState(0)
   const heroRef = useRef<HTMLDivElement>(null)
+  const [scrollProgress, setScrollProgress] = useState(0)
 
+  // 3D state machine
+  // capable → device passed all checks; mount → canvas is in the DOM; ready → R3F onCreated fired
+  const [capable, setCapable] = useState(false)
+  const [mount,   setMount]   = useState(false)
+  const [ready,   setReady]   = useState(false)
+
+  // 1. On first client render, detect device and schedule the canvas mount.
+  //    We defer via requestIdleCallback (or rAF×2 for Safari) so the static
+  //    hero image renders and hits LCP before any Three.js work starts.
+  useEffect(() => {
+    if (!shouldRender3D()) return
+
+    setCapable(true)
+
+    // requestIdleCallback fires when the browser is idle after first paint.
+    // { timeout: 2000 } forces it after 2 s even if the browser never idles.
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(() => setMount(true), { timeout: 2000 })
+      return () => cancelIdleCallback(id)
+    }
+
+    // Safari fallback: two rAF cycles guarantee first paint has happened.
+    let r1 = 0, r2 = 0
+    r1 = requestAnimationFrame(() => { r2 = requestAnimationFrame(() => setMount(true)) })
+    return () => { cancelAnimationFrame(r1); cancelAnimationFrame(r2) }
+  }, [])
+
+  // 2. Scroll progress for the bus drive-in animation (only relevant when 3D is active).
   useEffect(() => {
     const onScroll = () => {
       const hero = heroRef.current
       if (!hero) return
       const rect = hero.getBoundingClientRect()
       const total = hero.offsetHeight + window.innerHeight
-      const scrolled = window.innerHeight - rect.top
-      setScrollProgress(Math.min(1, Math.max(0, scrolled / total)))
+      setScrollProgress(Math.min(1, Math.max(0, (window.innerHeight - rect.top) / total)))
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
@@ -43,11 +135,15 @@ export default function HeroSection() {
       ref={heroRef}
       className="min-h-screen bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 relative flex items-center"
     >
-      <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-5 pointer-events-none" aria-hidden="true" />
+      <div
+        className="absolute inset-0 bg-[url('/pattern.svg')] opacity-5 pointer-events-none"
+        aria-hidden="true"
+      />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12 w-full">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-          {/* Left — copy */}
+          {/* ── Left — copy ──────────────────────────────────────────── */}
           <div className="order-2 lg:order-1">
             <span className="inline-block bg-emerald-500/20 text-emerald-300 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-6 border border-emerald-500/30">
               Premium Bus Tours from Udaipur, Rajasthan
@@ -57,10 +153,12 @@ export default function HeroSection() {
               <span className="block text-emerald-400">in Luxury</span>
             </h1>
             <p className="text-emerald-200 text-lg leading-relaxed mb-8 max-w-lg">
-              GPS-tracked luxury buses, English-speaking drivers, and expertly crafted itineraries across Rajasthan and all of India — tailored for discerning international travellers.
+              GPS-tracked luxury buses, English-speaking drivers, and expertly crafted
+              itineraries across Rajasthan and all of India — tailored for discerning
+              international travellers.
             </p>
 
-            {/* Stats row */}
+            {/* Stats */}
             <div className="grid grid-cols-4 gap-4 mb-10">
               {heroStats.map((s) => (
                 <div key={s.label} className="text-center">
@@ -90,9 +188,31 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right — 3D Bus */}
-          <div className="order-1 lg:order-2 h-[380px] sm:h-[460px] lg:h-[540px] rounded-2xl overflow-hidden ring-1 ring-emerald-500/30 shadow-2xl shadow-emerald-900/60">
-            <BusScene scrollProgress={scrollProgress} />
+          {/* ── Right — bus visual ────────────────────────────────────── */}
+          {/* Space is reserved at exact canvas dimensions — no layout shift */}
+          <div className="order-1 lg:order-2 h-[380px] sm:h-[460px] lg:h-[540px] rounded-2xl overflow-hidden ring-1 ring-emerald-500/30 shadow-2xl shadow-emerald-900/60 relative bg-emerald-950">
+
+            {/* Static hero image — LCP element, visible immediately and on all devices */}
+            <HeroPlaceholder visible={!ready} />
+
+            {/* 3D canvas — mounted after first paint on capable devices only.
+                Fades in over the static placeholder once R3F signals onCreated. */}
+            {mount && (
+              <div
+                className={`absolute inset-0 transition-opacity duration-700 ${ready ? 'opacity-100' : 'opacity-0'}`}
+              >
+                <BusScene scrollProgress={scrollProgress} onReady={() => setReady(true)} />
+              </div>
+            )}
+
+            {/* Loading hint — shown while canvas is mounting but not yet painted */}
+            {capable && mount && !ready && (
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
+                <span className="text-xs font-medium text-emerald-200 bg-emerald-950/80 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-lg">
+                  Loading 3D view…
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>

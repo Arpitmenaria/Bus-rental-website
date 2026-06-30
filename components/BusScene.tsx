@@ -278,9 +278,11 @@ function FogSetup() {
 
 interface BusSceneProps {
   scrollProgress: number
+  /** Called once the R3F canvas has initialised — used to trigger the fade-in. */
+  onReady?: () => void
 }
 
-export default function BusScene({ scrollProgress }: BusSceneProps) {
+export default function BusScene({ scrollProgress, onReady }: BusSceneProps) {
   const [isInspecting, setIsInspecting] = useState(false)
 
   return (
@@ -289,6 +291,7 @@ export default function BusScene({ scrollProgress }: BusSceneProps) {
         shadows
         camera={{ position: [0, 3.5, 9], fov: 42 }}
         onClick={() => setIsInspecting((v) => !v)}
+        onCreated={onReady}
         style={{ cursor: 'pointer', background: 'linear-gradient(to bottom, #022c22, #064e3b)' }}
       >
         <FogSetup />
