@@ -62,6 +62,15 @@ export const SITE = {
     rajasthanTourism: '',
   },
 
+  reviews: {
+    /** TODO: Google Business Profile reviews URL (from your Google Maps business listing) */
+    googleUrl: '',
+    /** TODO: TripAdvisor listing URL for your property */
+    tripAdvisorUrl: '',
+    /** TODO: Google Place ID — find it at developers.google.com/maps/documentation/javascript/place-id */
+    googlePlaceId: '',
+  },
+
   response: {
     whatsapp: 'Under 5 minutes',
     email: '2 hours',

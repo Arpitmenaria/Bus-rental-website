@@ -8,11 +8,25 @@ import { tourListSchema } from '@/lib/schema'
 
 const WA = waUrl("Hi ShivShakti, I'm interested in a Rajasthan tour package.")
 
-const tours = [
+interface Tour {
+  title: string
+  duration: string
+  price: string
+  priceUSD: string | null // TODO: add USD equivalent before going live, e.g. '$340'
+  priceNote: string
+  route: string[]
+  gradient: string
+  tag: string
+  highlights: string[]
+  includes: string[]
+}
+
+const tours: Tour[] = [
   {
     title: 'Golden Rajasthan Circuit',
     duration: '7 Days / 6 Nights',
     price: '₹28,000',
+    priceUSD: null, // TODO: e.g. '$340'
     priceNote: 'per person (min 2)',
     route: ['Udaipur', 'Jodhpur', 'Jaisalmer', 'Jaipur'],
     gradient: 'from-amber-500 to-orange-600',
@@ -40,6 +54,7 @@ const tours = [
     title: 'Royal Heritage Express',
     duration: '5 Days / 4 Nights',
     price: '₹18,500',
+    priceUSD: null, // TODO: e.g. '$225'
     priceNote: 'per person (min 2)',
     route: ['Udaipur', 'Chittorgarh', 'Pushkar', 'Ajmer'],
     gradient: 'from-rose-600 to-rose-800',
@@ -66,6 +81,7 @@ const tours = [
     title: 'Desert Safari Special',
     duration: '4 Days / 3 Nights',
     price: '₹16,000',
+    priceUSD: null, // TODO: e.g. '$195'
     priceNote: 'per person (min 2)',
     route: ['Jodhpur', 'Jaisalmer', 'Sam Dunes'],
     gradient: 'from-yellow-600 to-amber-700',
@@ -90,6 +106,7 @@ const tours = [
     title: 'Udaipur Lakes & Palaces',
     duration: '3 Days / 2 Nights',
     price: '₹9,500',
+    priceUSD: null, // TODO: e.g. '$115'
     priceNote: 'per person (min 2)',
     route: ['Udaipur', 'Kumbhalgarh', 'Ranakpur'],
     gradient: 'from-teal-600 to-emerald-700',
@@ -115,6 +132,7 @@ const tours = [
     title: 'Shekhawati Open Art Gallery',
     duration: '3 Days / 2 Nights',
     price: '₹12,000',
+    priceUSD: null, // TODO: e.g. '$145'
     priceNote: 'per person (min 2)',
     route: ['Jaipur', 'Nawalgarh', 'Mandawa', 'Fatehpur'],
     gradient: 'from-indigo-600 to-violet-700',
@@ -139,6 +157,7 @@ const tours = [
     title: 'Complete Rajasthan Grand Tour',
     duration: '14 Days / 13 Nights',
     price: '₹58,000',
+    priceUSD: null, // TODO: e.g. '$700'
     priceNote: 'per person (min 2)',
     route: ['Udaipur', 'Chittorgarh', 'Pushkar', 'Jaipur', 'Shekhawati', 'Bikaner', 'Jaisalmer', 'Jodhpur'],
     gradient: 'from-emerald-700 to-emerald-950',
@@ -164,7 +183,7 @@ const tours = [
   },
 ]
 
-function TourCard({ tour }: { tour: typeof tours[0] }) {
+function TourCard({ tour }: { tour: Tour }) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -192,7 +211,17 @@ function TourCard({ tour }: { tour: typeof tours[0] }) {
         <div className="flex items-end justify-between mb-5">
           <div>
             <p className="text-gray-500 text-xs mb-0.5">{tour.priceNote}</p>
-            <p className="font-serif text-3xl font-bold text-emerald-700">{tour.price}</p>
+            <p className="font-serif text-3xl font-bold text-emerald-700">
+              {tour.price}
+              {tour.priceUSD && (
+                <span className="text-gray-400 font-sans font-normal text-base ml-1.5">
+                  / {tour.priceUSD}
+                </span>
+              )}
+            </p>
+            {!tour.priceUSD && (
+              <p className="text-amber-500 text-[10px] font-mono mt-0.5">[TODO: add USD price]</p>
+            )}
           </div>
           <a
             href={waUrl(`Hi, I'm interested in the ${tour.title} tour.`)}

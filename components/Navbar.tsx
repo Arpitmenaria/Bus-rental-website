@@ -10,6 +10,7 @@ const navLinks = [
   { label: 'India Tours', href: '/india-tours' },
   { label: 'Private Charter', href: '/charter' },
   { label: 'Blog', href: '/blog' },
+  { label: 'FAQ', href: '/faq' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ]

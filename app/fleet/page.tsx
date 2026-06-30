@@ -34,12 +34,26 @@ export const metadata: Metadata = {
 
 const WA = waUrl('Hi ShivShakti, I am interested in hiring a bus.')
 
-const buses = [
+interface Bus {
+  name: string
+  type: string
+  emoji: string
+  price: string
+  priceUSD: string | null // TODO: add USD/km equivalent before going live
+  capacity: string
+  amenities: string[]
+  features: string[]
+  routes: string
+  gradient: string
+}
+
+const buses: Bus[] = [
   {
     name: 'Volvo 9400 Sleeper',
     type: 'AC Luxury Sleeper',
     emoji: '🛏️',
     price: '₹18/km',
+    priceUSD: null, // TODO: e.g. '$0.22/km'
     capacity: '36 berths',
     amenities: ['AC', 'WiFi', 'Washroom', 'USB Charging', 'Reading Lights', 'Blankets'],
     features: [
@@ -58,6 +72,7 @@ const buses = [
     type: 'AC Luxury Sleeper',
     emoji: '🌙',
     price: '₹20/km',
+    priceUSD: null, // TODO: e.g. '$0.24/km'
     capacity: '40 berths',
     amenities: ['AC', 'WiFi', 'Washroom', 'USB Charging', 'Entertainment'],
     features: [
@@ -76,6 +91,7 @@ const buses = [
     type: 'AC Luxury Seater',
     emoji: '💺',
     price: '₹14/km',
+    priceUSD: null, // TODO: e.g. '$0.17/km'
     capacity: '45 seats',
     amenities: ['AC', 'WiFi', 'USB Charging', 'Luggage Space'],
     features: [
@@ -94,6 +110,7 @@ const buses = [
     type: 'AC Semi-Sleeper',
     emoji: '⭐',
     price: '₹13/km',
+    priceUSD: null, // TODO: e.g. '$0.16/km'
     capacity: '40 seats',
     amenities: ['AC', 'WiFi', 'USB Charging', 'Cooler'],
     features: [
@@ -112,6 +129,7 @@ const buses = [
     type: 'AC Seater',
     emoji: '🚌',
     price: '₹10/km',
+    priceUSD: null, // TODO: e.g. '$0.12/km'
     capacity: '49 seats',
     amenities: ['AC', 'USB Charging', 'Luggage Space'],
     features: [
@@ -130,6 +148,7 @@ const buses = [
     type: 'AC Minivan',
     emoji: '🚐',
     price: '₹18/km',
+    priceUSD: null, // TODO: e.g. '$0.22/km'
     capacity: '12 seats',
     amenities: ['AC', 'USB Charging', 'Cooler'],
     features: [
@@ -148,6 +167,7 @@ const buses = [
     type: 'VIP Luxury Seater',
     emoji: '👑',
     price: '₹25/km',
+    priceUSD: null, // TODO: e.g. '$0.30/km'
     capacity: '36 seats (2+1)',
     amenities: ['AC', 'WiFi', 'Washroom', 'USB Charging', 'Bar', 'Entertainment'],
     features: [
@@ -196,6 +216,11 @@ export default function FleetPage() {
                   <div>
                     <p className="text-white/60 text-xs uppercase tracking-widest mb-1">Starting from</p>
                     <p className="font-serif text-4xl font-bold text-white">{bus.price}</p>
+                    {bus.priceUSD ? (
+                      <p className="text-white/60 text-sm mt-0.5">≈ {bus.priceUSD}</p>
+                    ) : (
+                      <p className="text-amber-300/70 text-[10px] font-mono mt-0.5">[TODO: USD]</p>
+                    )}
                     <a
                       href={waUrl(`Hi, I'm interested in the ${bus.name}.`)}
                       target="_blank"

@@ -114,6 +114,37 @@ export function indiaTourListSchema(
   }
 }
 
+export function faqSchema(items: Array<{ question: string; answer: string }>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  }
+}
+
+export function aggregateRatingSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: SITE.name,
+    url: SITE.url,
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: SITE.stats.rating,
+      reviewCount: String(SITE.stats.reviewCount),
+      bestRating: '5',
+      worstRating: '1',
+    },
+  }
+}
+
 export function articleSchema({
   title,
   description,

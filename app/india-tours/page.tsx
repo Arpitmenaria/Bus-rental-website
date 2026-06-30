@@ -36,11 +36,24 @@ export const metadata: Metadata = {
 
 const WA = waUrl("Hi ShivShakti, I'm interested in an All India tour package.")
 
-const packages = [
+interface IndiaTour {
+  title: string
+  duration: string
+  price: string
+  priceUSD: string | null // TODO: add USD equivalent before going live
+  route: string
+  gradient: string
+  tag: string
+  highlights: string[]
+  desc: string
+}
+
+const packages: IndiaTour[] = [
   {
     title: 'Golden Triangle',
     duration: '6 Days / 5 Nights',
     price: '₹22,000',
+    priceUSD: null, // TODO: e.g. '$265'
     route: 'Delhi → Agra → Jaipur → Delhi',
     gradient: 'from-amber-500 to-orange-600',
     tag: 'Classic',
@@ -51,6 +64,7 @@ const packages = [
     title: 'Golden Triangle + Udaipur',
     duration: '8 Days / 7 Nights',
     price: '₹32,000',
+    priceUSD: null, // TODO: e.g. '$390'
     route: 'Delhi → Agra → Jaipur → Udaipur → Delhi',
     gradient: 'from-teal-600 to-emerald-700',
     tag: 'Most Popular',
@@ -61,6 +75,7 @@ const packages = [
     title: 'North India Heritage',
     duration: '12 Days / 11 Nights',
     price: '₹45,000',
+    priceUSD: null, // TODO: e.g. '$545'
     route: 'Delhi → Amritsar → Shimla → Agra → Varanasi → Delhi',
     gradient: 'from-violet-600 to-purple-800',
     tag: 'Comprehensive',
@@ -71,6 +86,7 @@ const packages = [
     title: 'Spiritual India',
     duration: '10 Days / 9 Nights',
     price: '₹38,000',
+    priceUSD: null, // TODO: e.g. '$460'
     route: 'Delhi → Rishikesh → Haridwar → Varanasi → Bodh Gaya → Delhi',
     gradient: 'from-orange-600 to-rose-700',
     tag: 'Spiritual',
@@ -81,6 +97,7 @@ const packages = [
     title: 'Himalayan Explorer',
     duration: '14 Days / 13 Nights',
     price: '₹52,000',
+    priceUSD: null, // TODO: e.g. '$630'
     route: 'Delhi → Manali → Leh → Nubra → Pangong → Delhi',
     gradient: 'from-slate-600 to-blue-800',
     tag: 'Adventure',
@@ -91,6 +108,7 @@ const packages = [
     title: 'India Grand Odyssey',
     duration: '21 Days / 20 Nights',
     price: '₹95,000',
+    priceUSD: null, // TODO: e.g. '$1,150'
     route: 'Delhi → Rajasthan → Mumbai → Goa → Kerala',
     gradient: 'from-emerald-700 to-emerald-950',
     tag: 'Grand Tour',
@@ -164,7 +182,17 @@ export default function IndiaToursPage() {
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                     <div>
                       <p className="text-gray-400 text-xs">Per person from</p>
-                      <p className="font-serif text-2xl font-bold text-emerald-700">{pkg.price}</p>
+                      <p className="font-serif text-2xl font-bold text-emerald-700">
+                        {pkg.price}
+                        {pkg.priceUSD && (
+                          <span className="text-gray-400 font-sans font-normal text-sm ml-1.5">
+                            / {pkg.priceUSD}
+                          </span>
+                        )}
+                      </p>
+                      {!pkg.priceUSD && (
+                        <p className="text-amber-500 text-[10px] font-mono mt-0.5">[TODO: USD]</p>
+                      )}
                     </div>
                     <a
                       href={waUrl(`Hi, I'm interested in the ${pkg.title} India tour.`)}

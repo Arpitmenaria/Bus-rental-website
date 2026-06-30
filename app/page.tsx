@@ -3,6 +3,9 @@ import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import HeroSection from '@/components/HeroSection'
 import JsonLd from '@/components/JsonLd'
+import TrustBar from '@/components/TrustBar'
+import ReviewsSection from '@/components/ReviewsSection'
+import CredentialsStrip from '@/components/CredentialsStrip'
 import { SITE, waUrl } from '@/lib/site'
 import { orgSchema } from '@/lib/schema'
 import { blogPosts } from '@/lib/blog-posts'
@@ -149,6 +152,9 @@ export default function HomePage() {
 
       {/* ── HERO (client component — 3D scene + scroll tracking) ── */}
       <HeroSection />
+
+      {/* ── TRUST BAR ── */}
+      <TrustBar variant="dark" />
 
       {/* ── SERVICES ── */}
       <section className="py-20 bg-white">
@@ -297,6 +303,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── REVIEWS (embed slots + aggregate rating) ── */}
+      <ReviewsSection includeJsonLd={false} />
+
       {/* ── FROM THE BLOG ── */}
       <section className="py-16 bg-emerald-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -386,12 +395,24 @@ export default function HomePage() {
               <p className="text-xs text-emerald-500">⭐ {SITE.stats.rating}/5 · {SITE.stats.reviewCount}+ reviews</p>
             </div>
 
-            {/* Services */}
+            {/* Navigate */}
             <div>
-              <h3 className="font-bold text-white mb-4 uppercase text-xs tracking-widest">Services</h3>
+              <h3 className="font-bold text-white mb-4 uppercase text-xs tracking-widest">Explore</h3>
               <ul className="space-y-2 text-sm">
-                {['AC Luxury Seater', 'AC Luxury Sleeper', 'VIP Private Charter', 'Wedding Buses', 'Corporate Tours', 'Educational Trips'].map((s) => (
-                  <li key={s}><span className="hover:text-emerald-200 cursor-pointer transition-colors">{s}</span></li>
+                {[
+                  { label: 'Our Fleet', href: '/fleet' },
+                  { label: 'Rajasthan Tours', href: '/rajasthan-tours' },
+                  { label: 'India Tours', href: '/india-tours' },
+                  { label: 'Private Charter', href: '/charter' },
+                  { label: 'About Us', href: '/about' },
+                  { label: 'FAQ', href: '/faq' },
+                  { label: 'Booking Policies', href: '/policies' },
+                ].map((l) => (
+                  <li key={l.href}>
+                    <Link href={l.href} className="hover:text-emerald-200 transition-colors">
+                      {l.label}
+                    </Link>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -439,9 +460,16 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="border-t border-emerald-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
-            <p className="text-xs text-emerald-600">© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
-            <p className="text-xs text-emerald-600">Made with ♥ in Udaipur, Rajasthan, India</p>
+          <div className="border-t border-emerald-800 pt-6">
+            <CredentialsStrip />
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
+              <p className="text-xs text-emerald-600">© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
+              <div className="flex items-center gap-4 text-xs text-emerald-600">
+                <Link href="/faq" className="hover:text-emerald-400 transition-colors">FAQ</Link>
+                <Link href="/policies" className="hover:text-emerald-400 transition-colors">Policies</Link>
+                <span>Made with ♥ in Udaipur</span>
+              </div>
+            </div>
           </div>
         </div>
       </footer>
