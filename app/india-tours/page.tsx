@@ -181,11 +181,11 @@ export default function IndiaToursPage() {
                   </ul>
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                     <div>
-                      <p className="text-gray-400 text-xs">Per person from</p>
+                      <p className="text-gray-500 text-xs">Per person from</p>
                       <p className="font-serif text-2xl font-bold text-emerald-700">
                         {pkg.price}
                         {pkg.priceUSD && (
-                          <span className="text-gray-400 font-sans font-normal text-sm ml-1.5">
+                          <span className="text-gray-500 font-sans font-normal text-sm ml-1.5">
                             / {pkg.priceUSD}
                           </span>
                         )}

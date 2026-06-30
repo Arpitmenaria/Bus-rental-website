@@ -29,10 +29,10 @@ export default function ReviewsSection({ includeJsonLd = true }: { includeJsonLd
           <div className="inline-flex items-center gap-2 bg-white border border-gray-100 rounded-full px-5 py-2 shadow-sm">
             <span className="text-amber-400 text-xl" aria-hidden="true">★</span>
             <span className="font-bold text-emerald-950 text-lg">{SITE.stats.rating}</span>
-            <span className="text-gray-400 text-sm">/ 5</span>
-            <span className="text-gray-300 mx-1">·</span>
+            <span className="text-gray-500 text-sm">/ 5</span>
+            <span className="text-gray-500 mx-1">·</span>
             <span className="text-gray-600 text-sm">{SITE.stats.reviewCount.toLocaleString()}+ reviews</span>
-            <span className="text-gray-300 mx-1">·</span>
+            <span className="text-gray-500 mx-1">·</span>
             <span className="text-gray-600 text-sm">{SITE.stats.countries} countries</span>
           </div>
         </div>

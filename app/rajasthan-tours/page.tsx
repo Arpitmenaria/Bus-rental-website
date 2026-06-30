@@ -214,7 +214,7 @@ function TourCard({ tour }: { tour: Tour }) {
             <p className="font-serif text-3xl font-bold text-emerald-700">
               {tour.price}
               {tour.priceUSD && (
-                <span className="text-gray-400 font-sans font-normal text-base ml-1.5">
+                <span className="text-gray-500 font-sans font-normal text-base ml-1.5">
                   / {tour.priceUSD}
                 </span>
               )}

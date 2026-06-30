@@ -205,7 +205,7 @@ export default function PoliciesPage() {
               <div>
                 <h3 className="font-bold text-emerald-950 mb-3 flex items-center gap-2">
                   <span className="w-5 h-5 bg-red-50 text-red-500 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0" aria-hidden="true">✕</span>
-                  Not Included <span className="text-gray-400 font-normal text-xs">(unless in your quote)</span>
+                  Not Included <span className="text-gray-500 font-normal text-xs">(unless in your quote)</span>
                 </h3>
                 <ul className="space-y-2 text-sm text-gray-700">
                   {[
@@ -225,7 +225,7 @@ export default function PoliciesPage() {
               </div>
             </div>
 
-            <p className="mt-5 text-xs text-gray-400 italic">
+            <p className="mt-5 text-xs text-gray-500 italic">
               Your final written quote will always list inclusions and exclusions explicitly.
               Nothing is assumed.
             </p>
@@ -239,7 +239,7 @@ export default function PoliciesPage() {
               clauses after review by a local professional. Minimum: data handling, jurisdiction,
               and insurance responsibility.]</Todo>
             </p>
-            <p className="text-gray-400 text-xs italic">
+            <p className="text-gray-500 text-xs italic">
               This page is a template and not legal advice. Have it reviewed before publishing.
             </p>
           </div>

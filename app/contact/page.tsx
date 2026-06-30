@@ -306,7 +306,7 @@ export default function ContactPage() {
                     We'll reply to <strong className="text-emerald-800">{successEmail}</strong> within{' '}
                     <strong>{SITE.response.email}</strong>.
                   </p>
-                  <p className="text-gray-400 text-sm mb-8">
+                  <p className="text-gray-500 text-sm mb-8">
                     In a hurry? We're on WhatsApp and usually reply in {SITE.response.whatsapp}.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -529,7 +529,7 @@ export default function ContactPage() {
                           </>
                         )}
                       </button>
-                      <p className="text-xs text-gray-400 text-center mt-3">
+                      <p className="text-xs text-gray-500 text-center mt-3">
                         We'll reply to your email within {SITE.response.email}. No spam, ever.
                         {' '}Prefer instant answers?{' '}
                         <a href={waFallback} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:underline font-medium">

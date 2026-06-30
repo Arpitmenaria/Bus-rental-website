@@ -186,7 +186,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                   <h3 className="font-serif font-bold text-emerald-950 group-hover:text-emerald-700 transition-colors leading-snug">
                     {related.title}
                   </h3>
-                  <p className="text-gray-400 text-xs mt-2">{related.readingTime} min read</p>
+                  <p className="text-gray-500 text-xs mt-2">{related.readingTime} min read</p>
                 </Link>
               ))}
             </div>

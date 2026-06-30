@@ -80,7 +80,7 @@ export default function BlogIndexPage() {
                 {featured.title}
               </h2>
               <p className="text-gray-600 mb-4 leading-relaxed">{featured.description}</p>
-              <div className="flex items-center gap-4 text-sm text-gray-400">
+              <div className="flex items-center gap-4 text-sm text-gray-500">
                 <time dateTime={featured.publishedAt}>
                   {new Date(featured.publishedAt).toLocaleDateString('en-US', {
                     year: 'numeric',
@@ -132,7 +132,7 @@ export default function BlogIndexPage() {
                   <p className="text-gray-500 text-sm leading-relaxed mb-4 line-clamp-2">
                     {post.description}
                   </p>
-                  <div className="flex items-center justify-between text-xs text-gray-400">
+                  <div className="flex items-center justify-between text-xs text-gray-500">
                     <time dateTime={post.publishedAt}>
                       {new Date(post.publishedAt).toLocaleDateString('en-US', {
                         month: 'short',
