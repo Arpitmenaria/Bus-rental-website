@@ -10,6 +10,7 @@ import {
   type FieldErrors,
 } from '@/lib/contact-validation'
 import type { ContactApiResponse } from '@/app/api/contact/route'
+import { trackWaClick, trackEmailClick, trackFormSuccess } from '@/lib/analytics'
 
 // ── Constants ────────────────────────────────────────────────────────────────
 
@@ -66,7 +67,7 @@ function Field({
         {required && <span className="text-red-400 ml-0.5" aria-hidden="true"> *</span>}
       </label>
       {children}
-      {hint && !error && <p className="text-gray-400 text-xs mt-1">{hint}</p>}
+      {hint && !error && <p className="text-gray-500 text-xs mt-1">{hint}</p>}
       {error && (
         <p id={`${id}-error`} role="alert" className="text-red-500 text-xs mt-1.5 flex items-center gap-1">
           <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -128,6 +129,7 @@ export default function ContactPage() {
       }
 
       if (data.ok) {
+        trackFormSuccess(fields.groupSize)
         setSuccessEmail(fields.email)
         setFields(EMPTY)
         setStatus('success')
@@ -261,6 +263,7 @@ export default function ContactPage() {
                   href={waFallback}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackWaClick('contact-sidebar')}
                   className="flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-5 py-3 rounded-xl w-full transition-colors"
                 >
                   {WA_ICON}
@@ -276,6 +279,7 @@ export default function ContactPage() {
                 </p>
                 <a
                   href={`mailto:${SITE.email.main}?subject=Tour%20Enquiry&body=Hi%20ShivShakti%20Tourist%2C%0A%0AI%27d%20like%20to%20enquire%20about%20a%20tour.%0A%0A`}
+                  onClick={() => trackEmailClick('contact-sidebar')}
                   className="flex items-center justify-center gap-2 bg-white border-2 border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-semibold px-5 py-3 rounded-xl w-full transition-colors"
                 >
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
@@ -310,6 +314,7 @@ export default function ContactPage() {
                       href={waUrl("Hi ShivShakti, I just sent an enquiry via the website and wanted to connect on WhatsApp too.")}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => trackWaClick('contact-success')}
                       className="flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-5 py-3 rounded-xl transition-colors"
                     >
                       {WA_ICON}
@@ -495,7 +500,7 @@ export default function ContactPage() {
                         aria-describedby={fieldErrors.description ? 'description-error' : undefined}
                         className={inputCls(!!fieldErrors.description, 'resize-none')}
                       />
-                      <p className="text-gray-300 text-xs mt-1 text-right">
+                      <p className="text-gray-500 text-xs mt-1 text-right">
                         {fields.description.length} / 2000
                       </p>
                     </Field>

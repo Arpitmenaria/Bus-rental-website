@@ -11,3 +11,20 @@ body {
   background: #ffffff;
   color: #111827;
 }
+
+/* ── Keyboard focus ring (WCAG 2.4.7) ── */
+/* Applies to all interactive elements without an explicit Tailwind focus class.
+   Tailwind's focus:outline-none (specificity 0,2,0) overrides this (0,1,0) for
+   form inputs that already have custom ring styles. */
+:focus-visible {
+  outline: 2px solid #059669;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

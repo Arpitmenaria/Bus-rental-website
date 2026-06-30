@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { SITE, WA_DEFAULT } from '@/lib/site'
+import { trackWaClick } from '@/lib/analytics'
 
 // Three.js canvas — completely excluded from SSR and the initial JS bundle.
 // The dynamic() call creates a separate lazy chunk; it is only fetched after
@@ -174,6 +175,7 @@ export default function HeroSection() {
                 href={WA_DEFAULT}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackWaClick('hero')}
                 className="flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white font-bold px-6 py-3.5 rounded-xl shadow-xl shadow-emerald-500/30 transition-all hover:-translate-y-0.5"
               >
                 {WA_ICON}
@@ -218,7 +220,7 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll hint */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce" aria-hidden="true">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 motion-safe:animate-bounce" aria-hidden="true">
         <div className="w-6 h-10 border-2 border-emerald-400/50 rounded-full flex justify-center pt-2">
           <div className="w-1 h-3 bg-emerald-400/70 rounded-full" />
         </div>

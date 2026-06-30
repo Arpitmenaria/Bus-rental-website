@@ -6,6 +6,7 @@ import JsonLd from '@/components/JsonLd'
 import TrustBar from '@/components/TrustBar'
 import ReviewsSection from '@/components/ReviewsSection'
 import CredentialsStrip from '@/components/CredentialsStrip'
+import AnalyticsLink from '@/components/AnalyticsLink'
 import { SITE, waUrl } from '@/lib/site'
 import { orgSchema } from '@/lib/schema'
 import { blogPosts } from '@/lib/blog-posts'
@@ -352,8 +353,10 @@ export default function HomePage() {
             with full pricing within 2 hours.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
+            <AnalyticsLink
               href={WA_DEFAULT_URL}
+              event="wa_click"
+              source="cta-banner"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 bg-white text-emerald-700 font-bold px-8 py-4 rounded-xl shadow-xl hover:shadow-2xl transition-all hover:-translate-y-0.5 text-lg"
@@ -362,13 +365,15 @@ export default function HomePage() {
                 <path d={WA_ICON_PATH} />
               </svg>
               WhatsApp Us Now
-            </a>
-            <a
+            </AnalyticsLink>
+            <AnalyticsLink
               href={`mailto:${SITE.email.main}`}
+              event="email_click"
+              source="cta-banner"
               className="flex items-center justify-center gap-2 bg-emerald-800/40 border-2 border-white/40 text-white font-bold px-8 py-4 rounded-xl hover:bg-emerald-800/60 transition-all text-lg"
             >
               ✉ Email Us
-            </a>
+            </AnalyticsLink>
           </div>
         </div>
       </section>
@@ -446,11 +451,11 @@ export default function HomePage() {
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-emerald-500" aria-hidden="true">📞</span>
-                  <a href={`tel:+${SITE.phone.wa}`} className="hover:text-white transition-colors">{SITE.phone.display}</a>
+                  <AnalyticsLink href={`tel:+${SITE.phone.wa}`} event="phone_click" source="footer" className="hover:text-white transition-colors">{SITE.phone.display}</AnalyticsLink>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-emerald-500" aria-hidden="true">✉</span>
-                  <a href={`mailto:${SITE.email.main}`} className="hover:text-white transition-colors">{SITE.email.main}</a>
+                  <AnalyticsLink href={`mailto:${SITE.email.main}`} event="email_click" source="footer" className="hover:text-white transition-colors">{SITE.email.main}</AnalyticsLink>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-emerald-500" aria-hidden="true">🕐</span>
