@@ -468,10 +468,10 @@ export default function HomePage() {
           <div className="border-t border-emerald-800 pt-6">
             <CredentialsStrip />
             <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
-              <p className="text-xs text-emerald-600">© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
-              <div className="flex items-center gap-4 text-xs text-emerald-600">
-                <Link href="/faq" className="hover:text-emerald-400 transition-colors">FAQ</Link>
-                <Link href="/policies" className="hover:text-emerald-400 transition-colors">Policies</Link>
+              <p className="text-xs text-emerald-400">© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
+              <div className="flex items-center gap-4 text-xs text-emerald-400">
+                <Link href="/faq" className="hover:text-emerald-200 transition-colors">FAQ</Link>
+                <Link href="/policies" className="hover:text-emerald-200 transition-colors">Policies</Link>
                 <span>Made with ♥ in Udaipur</span>
               </div>
             </div>
