@@ -1,5 +1,38 @@
+import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
+import JsonLd from '@/components/JsonLd'
 import { SITE, waUrl } from '@/lib/site'
+import { orgSchema } from '@/lib/schema'
+
+const PAGE_URL = `${SITE.url}/charter`
+
+export const metadata: Metadata = {
+  title: 'Private Bus Charter Rajasthan — Weddings, Corporate, Groups | ShivShakti Tourist',
+  description:
+    'Private bus charter across Rajasthan and India for weddings, corporate groups, airport transfers and educational tours. Dedicated bus, driver and coordinator. Custom quotes in 2 hours.',
+  keywords: [
+    'private bus charter Rajasthan',
+    'wedding bus hire Udaipur',
+    'corporate bus charter India',
+    'group transport Rajasthan',
+    'private bus hire India foreigners',
+  ],
+  alternates: { canonical: PAGE_URL },
+  openGraph: {
+    title: 'Private Bus Charter for Any Occasion — ShivShakti Tourist, Rajasthan',
+    description:
+      'Wedding processions, corporate charters, airport transfers, yoga retreats and film shoots. Dedicated bus, driver and on-board coordinator. Transparent pricing from ₹10/km.',
+    url: PAGE_URL,
+    type: 'website',
+    siteName: SITE.name,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Private Bus Charter — ShivShakti Tourist, Udaipur Rajasthan',
+    description:
+      'Weddings, corporate groups, educational tours and more. Your bus, your schedule. Custom quotes in 2 hours.',
+  },
+}
 
 const WA = waUrl("Hi ShivShakti, I'm interested in a private charter.")
 
@@ -83,6 +116,7 @@ export default function CharterPage() {
   return (
     <main>
       <Navbar />
+      <JsonLd data={orgSchema()} />
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-900 pt-32 pb-20">

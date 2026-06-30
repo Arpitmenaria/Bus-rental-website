@@ -1,5 +1,36 @@
+import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
-import { waUrl } from '@/lib/site'
+import JsonLd from '@/components/JsonLd'
+import { SITE, waUrl } from '@/lib/site'
+import { orgSchema } from '@/lib/schema'
+
+const PAGE_URL = `${SITE.url}/fleet`
+
+export const metadata: Metadata = {
+  title: 'Luxury Bus Fleet for Hire — Volvo Sleeper, VIP Coach & More | ShivShakti Tourist',
+  description: `${SITE.stats.buses} GPS-tracked luxury buses for hire in Udaipur — Volvo sleepers, VIP coaches, and minivans. Rates from ₹10/km. English-speaking drivers and 24/7 support included.`,
+  keywords: [
+    'luxury bus hire Udaipur',
+    'Volvo bus rental Rajasthan',
+    'private bus charter India',
+    'sleeper bus hire Rajasthan',
+    'VIP coach hire Udaipur',
+  ],
+  alternates: { canonical: PAGE_URL },
+  openGraph: {
+    title: 'Luxury Bus Fleet for Hire — Volvo, Scania, Mercedes | ShivShakti Tourist',
+    description:
+      'Volvo 9400 Sleepers, Scania Seaters, VIP coaches and 12-seat vans — all GPS-tracked with verified professional drivers. Rates from ₹10/km, transparent pricing.',
+    url: PAGE_URL,
+    type: 'website',
+    siteName: SITE.name,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Luxury Bus Fleet for Hire — ShivShakti Tourist, Udaipur',
+    description: `${SITE.stats.buses} GPS-tracked buses from ₹10/km. Volvo sleepers, VIP coaches, minivans. English-speaking drivers. Serving international groups across India.`,
+  },
+}
 
 const WA = waUrl('Hi ShivShakti, I am interested in hiring a bus.')
 
@@ -136,6 +167,7 @@ export default function FleetPage() {
   return (
     <main>
       <Navbar />
+      <JsonLd data={orgSchema()} />
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-emerald-950 to-emerald-800 pt-32 pb-20">

@@ -2,7 +2,9 @@
 
 import { useState } from 'react'
 import Navbar from '@/components/Navbar'
+import JsonLd from '@/components/JsonLd'
 import { waUrl } from '@/lib/site'
+import { tourListSchema } from '@/lib/schema'
 
 const WA = waUrl("Hi ShivShakti, I'm interested in a Rajasthan tour package.")
 
@@ -242,6 +244,7 @@ export default function RajasthanToursPage() {
   return (
     <main>
       <Navbar />
+      <JsonLd data={tourListSchema(tours)} />
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-amber-900 via-orange-900 to-emerald-900 pt-32 pb-20">

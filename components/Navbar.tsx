@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { SITE, WA_DEFAULT } from '@/lib/site'
+import { WA_DEFAULT } from '@/lib/site'
 
 const navLinks = [
   { label: 'Our Fleet', href: '/fleet' },
   { label: 'Rajasthan Tours', href: '/rajasthan-tours' },
   { label: 'India Tours', href: '/india-tours' },
   { label: 'Private Charter', href: '/charter' },
+  { label: 'Blog', href: '/blog' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ]

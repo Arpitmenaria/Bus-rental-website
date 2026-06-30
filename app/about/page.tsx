@@ -1,5 +1,34 @@
+import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
-import { waUrl } from '@/lib/site'
+import JsonLd from '@/components/JsonLd'
+import { SITE, waUrl } from '@/lib/site'
+import { orgSchema } from '@/lib/schema'
+
+const PAGE_URL = `${SITE.url}/about`
+
+export const metadata: Metadata = {
+  title: `About ${SITE.name} — Udaipur Luxury Bus Operator Since ${SITE.founded}`,
+  description: `Est. ${SITE.founded} in Udaipur. ${SITE.name} has served ${SITE.stats.tourists} international travellers across ${SITE.stats.states} states. Meet our team and read our story.`,
+  keywords: [
+    'about ShivShakti Tourist',
+    'Udaipur tour operator history',
+    'trusted bus company Rajasthan',
+    'luxury bus operator Udaipur India',
+  ],
+  alternates: { canonical: PAGE_URL },
+  openGraph: {
+    title: `About ${SITE.name} — ${SITE.stats.years} Years Serving International Travellers`,
+    description: `Founded in ${SITE.founded} by Shiv Lal Prajapati, ${SITE.name} is Udaipur's most trusted luxury bus operator. ${SITE.stats.tourists} guests from ${SITE.stats.countries} countries served.`,
+    url: PAGE_URL,
+    type: 'website',
+    siteName: SITE.name,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `About ${SITE.name} — Udaipur Luxury Bus Operator`,
+    description: `Est. ${SITE.founded}. ${SITE.stats.tourists} international guests. ${SITE.stats.years} years of service. Meet the team behind Rajasthan's most trusted bus tours.`,
+  },
+}
 
 const WA = waUrl("Hi ShivShakti, I'd like to learn more about your services.")
 
@@ -69,6 +98,7 @@ export default function AboutPage() {
   return (
     <main>
       <Navbar />
+      <JsonLd data={orgSchema()} />
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-emerald-950 to-emerald-800 pt-32 pb-24 relative overflow-hidden">

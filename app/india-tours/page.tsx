@@ -1,5 +1,38 @@
+import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
-import { waUrl } from '@/lib/site'
+import JsonLd from '@/components/JsonLd'
+import { SITE, waUrl } from '@/lib/site'
+import { orgSchema, indiaTourListSchema } from '@/lib/schema'
+
+const PAGE_URL = `${SITE.url}/india-tours`
+
+export const metadata: Metadata = {
+  title: 'All India Tour Packages by Private Luxury Bus | ShivShakti Tourist',
+  description:
+    'Golden Triangle, Himalayan Explorer, Spiritual India and more — private luxury bus tours across all of India from ₹22,000 per person. Custom multi-city itineraries available.',
+  keywords: [
+    'Golden Triangle bus tour',
+    'India tour by private bus',
+    'all India tour packages',
+    'Golden Triangle tour from Udaipur',
+    'North India private coach tour',
+  ],
+  alternates: { canonical: PAGE_URL },
+  openGraph: {
+    title: 'All India Tours by Private Bus — ShivShakti Tourist, Udaipur',
+    description:
+      'From the Taj Mahal to Kerala backwaters — travel India by private luxury bus. 6 handcrafted multi-city packages from ₹22,000. Fully custom itineraries available.',
+    url: PAGE_URL,
+    type: 'website',
+    siteName: SITE.name,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'All India Tour Packages by Private Bus — ShivShakti Tourist',
+    description:
+      'Golden Triangle, Himalayas, Spiritual India and more. 6 packages from ₹22,000. Custom itineraries available.',
+  },
+}
 
 const WA = waUrl("Hi ShivShakti, I'm interested in an All India tour package.")
 
@@ -85,6 +118,8 @@ export default function IndiaToursPage() {
   return (
     <main>
       <Navbar />
+      <JsonLd data={orgSchema()} />
+      <JsonLd data={indiaTourListSchema(packages)} />
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-violet-950 via-indigo-900 to-emerald-900 pt-32 pb-20">
