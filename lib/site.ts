@@ -13,17 +13,13 @@ export const SITE = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://shivshaktitourist.com',
 
   phone: {
-    /** TODO: Replace with real phone number — display format */
-    display: '+91 98765 43210',
-    /** TODO: Replace with real WhatsApp number — digits only, with country code, no + or spaces */
-    wa: '919876543210',
+    display: '+91 63775 36559',
+    wa: '916377536559',
   },
 
   email: {
-    /** TODO: Replace with real primary email */
-    main: 'info@shivshaktitourist.com',
-    /** TODO: Replace with real charter/bookings email (can be same as main) */
-    charter: 'charter@shivshaktitourist.com',
+    main: 'shivshaktitouristudr@gmail.com',
+    charter: 'shivshaktitouristudr@gmail.com',
   },
 
   address: {
