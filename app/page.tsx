@@ -16,7 +16,7 @@ const PAGE_URL = SITE.url
 export const metadata: Metadata = {
   title: `${SITE.name} — Luxury Bus Tours & Private Hire from Udaipur, Rajasthan`,
   description:
-    'GPS-tracked luxury buses, English-speaking drivers and curated tours across Rajasthan and all of India. Based in Udaipur since 2012. Get a personalised quote in 2 hours.',
+    'GPS-tracked luxury buses, English-speaking drivers and curated tours across Rajasthan and all of India. Based in Udaipur since 2002. Get a personalised quote in 2 hours.',
   keywords: [
     'luxury bus tour Udaipur',
     'private bus hire Rajasthan',
@@ -110,17 +110,17 @@ const trustPoints = [
 ]
 
 const fleet = [
-  { name: 'Volvo 9400 Sleeper', type: 'Sleeper', seats: '36 berths', price: '₹18/km' },
-  { name: 'Volvo B11R', type: 'Sleeper', seats: '40 berths', price: '₹20/km' },
-  { name: 'Scania Metabus', type: 'Seater', seats: '45 seats', price: '₹14/km' },
-  { name: 'Volvo 9600 VIP', type: 'VIP', seats: '36 seats (2+1)', price: '₹25/km' },
+  { name: '48 Sleeper Ultra Luxury AC Bus', type: 'Sleeper', seats: '48 berths (2×2)', price: '₹35/km' },
+  { name: '50 Sleeper Luxury AC Bus', type: 'Sleeper', seats: '50 berths (2×2)', price: '₹35/km' },
+  { name: '58 Seater Push Back Coach', type: 'Ultra Luxury Seater', seats: '58 seats', price: '₹35/km' },
+  { name: '32 Seater AC Mini Bus', type: 'Mini Coach', seats: '32 seats', price: '₹35/km' },
 ]
 
 const testimonials = [
   {
     name: 'James & Sarah Mitchell',
     country: '🇬🇧 United Kingdom',
-    text: 'ShivShakti made our Rajasthan trip absolutely magical. The Volvo sleeper was spotlessly clean, the driver knew every hidden gem, and they handled everything perfectly. 10/10 would recommend to any traveller.',
+    text: 'ShivShakti made our Rajasthan trip absolutely magical. The sleeper bus was spotlessly clean, the driver knew every hidden gem, and they handled everything perfectly. 10/10 would recommend to any traveller.',
     rating: 5,
   },
   {

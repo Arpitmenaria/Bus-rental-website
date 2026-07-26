@@ -3,11 +3,19 @@
  * Search for TODO to find values you must replace before going live.
  */
 
+/**
+ * 'photo'  – the source image still has its original street/background in frame.
+ *            Rendered full-bleed with an emerald scrim (for text legibility) + a slow Ken Burns zoom.
+ * 'cutout' – background removed (transparent PNG). Rendered as a floating bus with
+ *            mouse-parallax tilt, idle float, a glow behind it, and a ground shadow.
+ */
+export type HeroBusImageMode = 'photo' | 'cutout'
+
 export const SITE = {
   name: 'ShivShakti Tourist',
   tagline: 'Luxury Bus Rental & Tours from Udaipur',
   description:
-    'Premium luxury bus rental and guided tours across Rajasthan and all of India. GPS-tracked fleet, English-speaking drivers, transparent pricing. Based in Udaipur since 2012.',
+    'Premium luxury bus rental and guided tours across Rajasthan and all of India. GPS-tracked fleet, English-speaking drivers, transparent pricing. Based in Udaipur since 2002.',
 
   /** TODO: Set your production domain (no trailing slash) */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://shivshaktitourist.com',
@@ -23,15 +31,13 @@ export const SITE = {
   },
 
   address: {
-    /** TODO: Confirm exact street address */
-    street: 'Near Udaipur City Railway Station',
+    street: 'Main Road, In Front of Axis Bank, Panchsheel Market, Hiran Magri, Sector 5, Prabhat Nagar',
     city: 'Udaipur',
     state: 'Rajasthan',
     pincode: '313001',
     country: 'India',
-    /** TODO: Verify lat/lng from Google Maps */
-    lat: 24.5854,
-    lng: 73.7125,
+    lat: 24.5621038,
+    lng: 73.7183601,
   },
 
   social: {
@@ -40,8 +46,8 @@ export const SITE = {
     facebook: '',
     youtube: '',
     tripadvisor: '',
-    /** TODO: Google Maps place URL for the business listing */
-    googleMaps: '',
+    googleMaps:
+      'https://www.google.com/maps/dir//Shiv+Shakti+Tourist+Agency,+Main+Road,+In+Front+Of+Axis+Bank+Branch,+Panchsheel+Market,+Hiran+Magri,+Sector+5,+Prabhat+Nagar,+Hiran+Magri,+Udaipur,+Rajasthan+313001/@24.5623677,73.7124787,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3967ef68b32c1233:0x497822fe1be113be!2m2!1d73.7183601!2d24.5621038',
   },
 
   credentials: {
@@ -73,7 +79,7 @@ export const SITE = {
   },
 
   stats: {
-    buses: 7,
+    buses: 6,
     /** TODO: Update as real years-in-business increases */
     years: 12,
     tourists: '5,000+',
@@ -84,7 +90,16 @@ export const SITE = {
     languages: ['English', 'Hindi', 'French', 'Spanish', 'German'],
   },
 
-  founded: 2012,
+  founded: 2002,
+
+  hero: {
+    busImage: 'https://res.cloudinary.com/uwzoaqhg/image/upload/v1784999341/IMG_6889_xtqsza.jpg',
+    // Currently a straight photo (street/buildings still in frame) — set to 'cutout'
+    // once a background-removed .png of the same bus is uploaded.
+    busImageMode: 'photo' as HeroBusImageMode,
+    busImageWidth: 1024,
+    busImageHeight: 1188,
+  },
 } as const
 
 /**

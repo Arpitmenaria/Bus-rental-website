@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: `About ${SITE.name} — ${SITE.stats.years} Years Serving International Travellers`,
-    description: `Founded in ${SITE.founded} by Shiv Lal Prajapati, ${SITE.name} is Udaipur's most trusted luxury bus operator. ${SITE.stats.tourists} guests from ${SITE.stats.countries} countries served.`,
+    description: `Founded in ${SITE.founded} by Kailash Chandra Menaria, ${SITE.name} is Udaipur's most trusted luxury bus operator. ${SITE.stats.tourists} guests from ${SITE.stats.countries} countries served.`,
     url: PAGE_URL,
     type: 'website',
     siteName: SITE.name,
@@ -42,46 +42,34 @@ const stats = [
 ]
 
 const timeline = [
-  { year: '2012', title: 'Founded in Udaipur', desc: 'Shiv Lal Prajapati starts ShivShakti Tourist with a single Tata bus and a dream of serving international travellers.' },
-  { year: '2015', title: 'First Volvo Acquired', desc: "The first Volvo 9400 sleeper joins the fleet — signalling the company's move into luxury tourism." },
+  { year: '2002', title: 'Founded in Udaipur', desc: 'Kailash Chandra Menaria starts ShivShakti Tourist with a single Tata bus and a dream of serving international travellers.' },
+  { year: '2015', title: 'First Sleeper Bus Acquired', desc: "The first AC sleeper coach joins the fleet — signalling the company's move into luxury tourism." },
   { year: '2018', title: 'All India Operations', desc: 'Team expands to 12 people, operations extend beyond Rajasthan to cover Delhi, Agra, Varanasi, and Mumbai routes.' },
   { year: '2021', title: 'GPS & Digital Upgrade', desc: 'All buses equipped with real-time GPS tracking and WhatsApp-based booking support. Paperless documentation.' },
-  { year: '2023', title: 'VIP Fleet Expansion', desc: 'Volvo 9600 VIP and Mercedes Touro join the fleet. 5000th international tourist milestone achieved.' },
+  { year: '2023', title: 'Ultra Luxury Fleet Expansion', desc: 'The 58-seater push-back ultra luxury coach and 48-sleeper ultra luxury bus join the fleet. 5000th international tourist milestone achieved.' },
   { year: '2025', title: 'Award & Recognition', desc: 'Rated #1 luxury bus operator in Rajasthan by multiple international travel blogs and tour agencies.' },
 ]
 
 const team = [
   {
     emoji: '👨‍💼',
-    name: 'Shiv Lal Prajapati',
-    role: 'Founder & Managing Director',
-    experience: '12 years',
-    languages: 'Hindi, English, Rajasthani',
-    bio: 'Born in Udaipur, Shiv Lal has spent his life mastering the roads and stories of Rajasthan. His vision: every foreign tourist deserves a royal experience.',
-  },
-  {
-    emoji: '👩‍💼',
-    name: 'Priya Sharma',
-    role: 'Head of Operations',
-    experience: '8 years',
-    languages: 'Hindi, English, French',
-    bio: 'Former hospitality professional who joined ShivShakti to build the systems that ensure every tour runs like clockwork.',
-  },
-  {
-    emoji: '👨‍✈️',
-    name: 'Ramesh Kumar',
-    role: 'Senior Driver & Route Expert',
-    experience: '15 years',
-    languages: 'Hindi, English, basic German',
-    bio: 'Ramesh has driven across 22 Indian states and is legendary among guests for his encyclopaedic knowledge of Rajasthani history.',
+    name: 'Kailash Chandra Menaria',
+    role: 'Owner',
   },
   {
     emoji: '👨‍💻',
-    name: 'Arjun Mehta',
+    name: 'Arpit Menaria',
+    role: 'Head of Operations (Digital & Vehicle Management)',
+  },
+  {
+    emoji: '👨‍✈️',
+    name: 'Prakash Kumar',
+    role: 'Senior Driver',
+  },
+  {
+    emoji: '👩‍⚕️',
+    name: 'Dr Nikita',
     role: 'Customer Experience Manager',
-    experience: '5 years',
-    languages: 'Hindi, English, Spanish',
-    bio: 'Arjun manages all pre and post-tour communication, ensuring every question is answered and every experience is memorable.',
   },
 ]
 
@@ -103,7 +91,7 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="bg-gradient-to-br from-emerald-950 to-emerald-800 pt-32 pb-24 relative overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-emerald-400 font-semibold text-sm tracking-widest uppercase mb-4">Est. 2012 · Udaipur, Rajasthan</p>
+          <p className="text-emerald-400 font-semibold text-sm tracking-widest uppercase mb-4">Est. 2002 · Udaipur, Rajasthan</p>
           <h1 className="font-serif text-5xl lg:text-7xl font-bold text-white mb-6">Our Story</h1>
           <p className="text-emerald-200 text-xl leading-relaxed max-w-3xl mx-auto">
             ShivShakti Tourist was born from a single conviction: that international visitors deserve to experience India not just as tourists, but as honoured guests — with comfort, safety, and genuine human connection at every mile.
@@ -132,7 +120,7 @@ export default function AboutPage() {
           <h2 className="font-serif text-3xl font-bold text-emerald-950 mb-6">The Founding Story</h2>
           <div className="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              In 2012, Shiv Lal Prajapati — a young man from Udaipur with a passion for his homeland — noticed that international tourists were arriving in Rajasthan but struggling to explore it properly. Hired cabs were unreliable, language barriers were frustrating, and the true magic of places like Kumbhalgarh, Ranakpur, and Sam Dunes remained out of reach.
+              In 2002, Kailash Chandra Menaria — a young man from Udaipur with a passion for his homeland — noticed that international tourists were arriving in Rajasthan but struggling to explore it properly. Hired cabs were unreliable, language barriers were frustrating, and the true magic of places like Kumbhalgarh, Ranakpur, and Sam Dunes remained out of reach.
             </p>
             <p>
               He invested his savings in a single Tata bus, learned English from YouTube videos and curious tourists, and started offering guided day trips out of Udaipur. Word spread quickly. A French couple told their friends. A British travel blogger wrote a glowing post. Within two years, ShivShakti Tourist had a waiting list.
@@ -180,12 +168,7 @@ export default function AboutPage() {
               <div key={member.name} className="bg-emerald-900/60 rounded-2xl p-6 border border-emerald-700/40 text-center">
                 <div className="text-5xl mb-3">{member.emoji}</div>
                 <h3 className="font-serif text-lg font-bold text-white mb-0.5">{member.name}</h3>
-                <p className="text-emerald-400 text-xs font-semibold uppercase tracking-wide mb-3">{member.role}</p>
-                <p className="text-emerald-300 text-sm leading-relaxed mb-4">{member.bio}</p>
-                <div className="text-xs text-emerald-500 space-y-1">
-                  <p>⏱ {member.experience} experience</p>
-                  <p>🗣 {member.languages}</p>
-                </div>
+                <p className="text-emerald-400 text-xs font-semibold uppercase tracking-wide">{member.role}</p>
               </div>
             ))}
           </div>

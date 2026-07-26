@@ -1,70 +1,140 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 import { SITE, WA_DEFAULT } from '@/lib/site'
 import { trackWaClick } from '@/lib/analytics'
 
-// Three.js canvas — completely excluded from SSR and the initial JS bundle.
-// The dynamic() call creates a separate lazy chunk; it is only fetched after
-// shouldRender3D() confirms the device can handle it.
-const BusScene = dynamic(() => import('@/components/BusScene'), { ssr: false })
+// ── Motion / input preference hooks ──────────────────────────────────────────
 
-// ── Device capability detection ───────────────────────────────────────────────
-// Called client-side only. Returns false → serve the static SVG forever.
-
-function shouldRender3D(): boolean {
-  // Reduced-motion: accessibility preference also signals "save resources"
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false
-
-  // Narrow viewport = almost certainly mobile; skip 3D for battery/perf
-  if (window.innerWidth < 768) return false
-
-  // Low device memory (<4 GB) — Chrome/Edge only; absent in Safari
-  type NavWithMemory = Navigator & { deviceMemory?: number }
-  const mem = (navigator as NavWithMemory).deviceMemory
-  if (typeof mem === 'number' && mem < 4) return false
-
-  // Low CPU core count — heuristic for low-power devices
-  if (typeof navigator.hardwareConcurrency === 'number' && navigator.hardwareConcurrency < 4) return false
-
-  return true
+function usePrefersReducedMotion(): boolean {
+  const [reduced, setReduced] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setReduced(mq.matches)
+    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+  return reduced
 }
 
-// ── Static hero image (LCP element) ──────────────────────────────────────────
-// Shown immediately on first paint and kept visible until 3D is ready.
-// On mobile / reduced-motion / low-power devices it is the permanent visual.
-//
-// TODO: Replace /hero-bus.svg with a real photograph of your bus for the best
-// possible LCP score. Add the file at /public/hero-bus.jpg (≥1200×750 px,
-// .webp or .jpg). Then replace the <Image> below with:
-//
-//   <Image src="/hero-bus.jpg" alt="ShivShakti luxury bus" fill priority
-//          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 600px"
-//          className="object-cover" />
-//
-// The SVG works as a placeholder and fallback; it has no negative LCP impact
-// because its <Image priority> tag signals the browser to preload it.
+function useIsTouchDevice(): boolean {
+  const [touch, setTouch] = useState(false)
+  useEffect(() => {
+    setTouch(window.matchMedia('(pointer: coarse)').matches)
+  }, [])
+  return touch
+}
 
-function HeroPlaceholder({ visible }: { visible: boolean }) {
+// ── Bus visual — "cutout" mode ────────────────────────────────────────────────
+// Used once SITE.hero.busImageMode is a background-removed PNG. Floats over the
+// panel with mouse-parallax tilt, an idle bob, a glow, and a ground shadow.
+
+function BusCutoutVisual() {
+  const reducedMotion = usePrefersReducedMotion()
+  const isTouch = useIsTouchDevice()
+  const panelRef = useRef<HTMLDivElement>(null)
+  const [tilt, setTilt] = useState({ x: 0, y: 0 })
+
+  useEffect(() => {
+    if (reducedMotion || isTouch) return
+    const panel = panelRef.current
+    if (!panel) return
+
+    let raf = 0
+    const onMove = (e: MouseEvent) => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() => {
+        const rect = panel.getBoundingClientRect()
+        const px = (e.clientX - rect.left) / rect.width
+        const py = (e.clientY - rect.top) / rect.height
+        setTilt({
+          x: Math.max(-6, Math.min(6, (0.5 - py) * 8)),
+          y: Math.max(-6, Math.min(6, (px - 0.5) * 12)),
+        })
+      })
+    }
+    const onLeave = () => setTilt({ x: 0, y: 0 })
+
+    panel.addEventListener('mousemove', onMove)
+    panel.addEventListener('mouseleave', onLeave)
+    return () => {
+      panel.removeEventListener('mousemove', onMove)
+      panel.removeEventListener('mouseleave', onLeave)
+      cancelAnimationFrame(raf)
+    }
+  }, [reducedMotion, isTouch])
+
   return (
     <div
-      className={`absolute inset-0 transition-opacity duration-700 ${visible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-      aria-hidden={!visible}
+      ref={panelRef}
+      className="order-1 lg:order-2 h-[380px] sm:h-[460px] lg:h-[540px] rounded-2xl overflow-hidden ring-1 ring-emerald-500/30 shadow-2xl shadow-emerald-900/60 relative bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800"
+      style={{ perspective: '1200px' }}
     >
-      <div className="relative w-full h-full bg-gradient-to-b from-emerald-950 to-emerald-800">
+      {/* Radial glow behind the bus — separates the dark vehicle from the dark panel */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
+        <div className="w-[75%] h-[75%] rounded-full bg-[radial-gradient(closest-side,rgba(209,250,229,0.35),rgba(5,150,105,0.14)_60%,transparent_80%)] blur-2xl" />
+      </div>
+
+      {/* Ground shadow */}
+      <div
+        className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[62%] h-7 bg-black/50 rounded-full blur-xl pointer-events-none"
+        aria-hidden="true"
+      />
+
+      {/* Ease-in zoom on first load (one-shot) */}
+      <div className={`absolute inset-0 flex items-center justify-center ${reducedMotion ? '' : 'motion-safe:animate-hero-zoom-in'}`}>
+        {/* Slow idle float (infinite loop) */}
+        <div className={`w-[78%] h-[78%] relative ${reducedMotion || isTouch ? '' : 'motion-safe:animate-hero-float'}`}>
+          {/* Mouse-parallax tilt */}
+          <div
+            className="w-full h-full relative transition-transform duration-150 ease-out"
+            style={{
+              transform: reducedMotion ? undefined : `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+              transformStyle: 'preserve-3d',
+            }}
+          >
+            <Image
+              src={SITE.hero.busImage}
+              alt="ShivShakti Tourist luxury bus"
+              width={SITE.hero.busImageWidth}
+              height={SITE.hero.busImageHeight}
+              priority
+              sizes="(max-width: 1024px) 70vw, 32vw"
+              className="w-full h-full object-contain [filter:drop-shadow(0_22px_20px_rgba(0,0,0,0.45))_drop-shadow(0_0_20px_rgba(209,250,229,0.3))]"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── Bus visual — "photo" mode ─────────────────────────────────────────────────
+// Used while the source image still has its original street background. Rendered
+// full-bleed behind the whole hero with an emerald scrim + a slow Ken Burns zoom.
+
+function BusPhotoBackground() {
+  const reducedMotion = usePrefersReducedMotion()
+
+  return (
+    <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+      <div className={`absolute inset-0 ${reducedMotion ? '' : 'motion-safe:animate-hero-ken-burns'}`}>
         <Image
-          src="/hero-bus.svg"
-          alt="ShivShakti Tourist luxury bus — Rajasthan, India"
-          fill
-          priority          // <-- LCP hint: browser fetches this on first paint
-          unoptimized       // SVGs skip the optimization pipeline
-          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 600px"
-          className="object-contain object-center"
+          src={SITE.hero.busImage}
+          alt=""
+          width={SITE.hero.busImageWidth}
+          height={SITE.hero.busImageHeight}
+          priority
+          sizes="100vw"
+          className="w-full h-full object-cover object-center"
         />
       </div>
+      {/* Scrim — keeps the headline legible over the photo */}
+      <div className="absolute inset-0 bg-gradient-to-r from-emerald-950 via-emerald-950/85 to-emerald-950/45" />
+      <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-transparent to-emerald-950/50" />
     </div>
   )
 }
@@ -87,65 +157,26 @@ const WA_ICON = (
 // ── Main component ────────────────────────────────────────────────────────────
 
 export default function HeroSection() {
-  const heroRef = useRef<HTMLDivElement>(null)
-  const [scrollProgress, setScrollProgress] = useState(0)
-
-  // 3D state machine
-  // capable → device passed all checks; mount → canvas is in the DOM; ready → R3F onCreated fired
-  const [capable, setCapable] = useState(false)
-  const [mount,   setMount]   = useState(false)
-  const [ready,   setReady]   = useState(false)
-
-  // 1. On first client render, detect device and schedule the canvas mount.
-  //    We defer via requestIdleCallback (or rAF×2 for Safari) so the static
-  //    hero image renders and hits LCP before any Three.js work starts.
-  useEffect(() => {
-    if (!shouldRender3D()) return
-
-    setCapable(true)
-
-    // requestIdleCallback fires when the browser is idle after first paint.
-    // { timeout: 2000 } forces it after 2 s even if the browser never idles.
-    if ('requestIdleCallback' in window) {
-      const id = requestIdleCallback(() => setMount(true), { timeout: 2000 })
-      return () => cancelIdleCallback(id)
-    }
-
-    // Safari fallback: two rAF cycles guarantee first paint has happened.
-    let r1 = 0, r2 = 0
-    r1 = requestAnimationFrame(() => { r2 = requestAnimationFrame(() => setMount(true)) })
-    return () => { cancelAnimationFrame(r1); cancelAnimationFrame(r2) }
-  }, [])
-
-  // 2. Scroll progress for the bus drive-in animation (only relevant when 3D is active).
-  useEffect(() => {
-    const onScroll = () => {
-      const hero = heroRef.current
-      if (!hero) return
-      const rect = hero.getBoundingClientRect()
-      const total = hero.offsetHeight + window.innerHeight
-      setScrollProgress(Math.min(1, Math.max(0, (window.innerHeight - rect.top) / total)))
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    onScroll()
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  const isPhotoMode = SITE.hero.busImageMode === 'photo'
 
   return (
-    <section
-      ref={heroRef}
-      className="min-h-screen bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800 relative flex items-center"
-    >
+    <section className="min-h-screen relative flex items-center overflow-hidden">
+      {isPhotoMode ? (
+        <BusPhotoBackground />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800" />
+      )}
+
       <div
         className="absolute inset-0 bg-[url('/pattern.svg')] opacity-5 pointer-events-none"
         aria-hidden="true"
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12 w-full">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12 w-full relative">
+        <div className={isPhotoMode ? 'max-w-2xl' : 'grid lg:grid-cols-2 gap-10 lg:gap-16 items-center'}>
 
-          {/* ── Left — copy ──────────────────────────────────────────── */}
-          <div className="order-2 lg:order-1">
+          {/* ── Copy ─────────────────────────────────────────────────── */}
+          <div className={isPhotoMode ? '' : 'order-2 lg:order-1'}>
             <span className="inline-block bg-emerald-500/20 text-emerald-300 text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full mb-6 border border-emerald-500/30">
               Premium Bus Tours from Udaipur, Rajasthan
             </span>
@@ -190,32 +221,8 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* ── Right — bus visual ────────────────────────────────────── */}
-          {/* Space is reserved at exact canvas dimensions — no layout shift */}
-          <div className="order-1 lg:order-2 h-[380px] sm:h-[460px] lg:h-[540px] rounded-2xl overflow-hidden ring-1 ring-emerald-500/30 shadow-2xl shadow-emerald-900/60 relative bg-emerald-950">
-
-            {/* Static hero image — LCP element, visible immediately and on all devices */}
-            <HeroPlaceholder visible={!ready} />
-
-            {/* 3D canvas — mounted after first paint on capable devices only.
-                Fades in over the static placeholder once R3F signals onCreated. */}
-            {mount && (
-              <div
-                className={`absolute inset-0 transition-opacity duration-700 ${ready ? 'opacity-100' : 'opacity-0'}`}
-              >
-                <BusScene scrollProgress={scrollProgress} onReady={() => setReady(true)} />
-              </div>
-            )}
-
-            {/* Loading hint — shown while canvas is mounting but not yet painted */}
-            {capable && mount && !ready && (
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
-                <span className="text-xs font-medium text-emerald-200 bg-emerald-950/80 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-lg">
-                  Loading 3D view…
-                </span>
-              </div>
-            )}
-          </div>
+          {/* ── Bus visual — only in cutout mode; photo mode is the section background ── */}
+          {!isPhotoMode && <BusCutoutVisual />}
         </div>
       </div>
 

@@ -219,9 +219,6 @@ function TourCard({ tour }: { tour: Tour }) {
                 </span>
               )}
             </p>
-            {!tour.priceUSD && (
-              <p className="text-amber-500 text-[10px] font-mono mt-0.5">[TODO: add USD price]</p>
-            )}
           </div>
           <a
             href={waUrl(`Hi, I'm interested in the ${tour.title} tour.`)}

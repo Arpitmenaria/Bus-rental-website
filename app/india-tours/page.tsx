@@ -190,9 +190,6 @@ export default function IndiaToursPage() {
                           </span>
                         )}
                       </p>
-                      {!pkg.priceUSD && (
-                        <p className="text-amber-500 text-[10px] font-mono mt-0.5">[TODO: USD]</p>
-                      )}
                     </div>
                     <a
                       href={waUrl(`Hi, I'm interested in the ${pkg.title} India tour.`)}
