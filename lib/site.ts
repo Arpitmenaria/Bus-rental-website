@@ -1,6 +1,8 @@
 /**
  * Single source of truth for all business configuration.
- * Search for TODO to find values you must replace before going live.
+ * Empty strings / false flags below are values only the business owner can
+ * supply (legal registration numbers, social profile URLs, review links).
+ * Fill them in directly once available.
  */
 
 /**
@@ -11,13 +13,14 @@
  */
 export type HeroBusImageMode = 'photo' | 'cutout'
 
+const FOUNDED_YEAR = 2002
+
 export const SITE = {
   name: 'ShivShakti Tourist',
   tagline: 'Luxury Bus Rental & Tours from Udaipur',
   description:
     'Premium luxury bus rental and guided tours across Rajasthan and all of India. GPS-tracked fleet, English-speaking drivers, transparent pricing. Based in Udaipur since 2002.',
 
-  /** TODO: Set your production domain (no trailing slash) */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://shivshaktitourist.com',
 
   phone: {
@@ -41,7 +44,7 @@ export const SITE = {
   },
 
   social: {
-    /** TODO: Add real social profile URLs, or set to '' to hide */
+    /** Set to a real profile URL to show the icon in the footer; '' hides it */
     instagram: '',
     facebook: '',
     youtube: '',
@@ -51,25 +54,25 @@ export const SITE = {
   },
 
   credentials: {
-    /** TODO: Enter 15-digit GST number once registered */
+    /** 15-digit GST number, once registered. CredentialsStrip hides the badge until set. */
     gst: '',
-    /** TODO: Enter company registration number */
+    /** Company registration number */
     registration: '',
-    /** TODO: Set true and add number when IATO membership is active */
+    /** Set true and add iatoNumber once IATO membership is active */
     iato: false,
     iatoNumber: '',
-    /** TODO: Set true when Ministry of Tourism approval letter received */
+    /** Set true once the Ministry of Tourism approval letter is received */
     ministryApproved: false,
-    /** TODO: Add Rajasthan Tourism Department registration number */
+    /** Rajasthan Tourism Department registration number */
     rajasthanTourism: '',
   },
 
   reviews: {
-    /** TODO: Google Business Profile reviews URL (from your Google Maps business listing) */
+    /** Google Business Profile reviews URL, from your Google Maps business listing */
     googleUrl: '',
-    /** TODO: TripAdvisor listing URL for your property */
+    /** TripAdvisor listing URL for your property */
     tripAdvisorUrl: '',
-    /** TODO: Google Place ID — find it at developers.google.com/maps/documentation/javascript/place-id */
+    /** Google Place ID: find it at developers.google.com/maps/documentation/javascript/place-id */
     googlePlaceId: '',
   },
 
@@ -80,8 +83,7 @@ export const SITE = {
 
   stats: {
     buses: 6,
-    /** TODO: Update as real years-in-business increases */
-    years: 12,
+    years: new Date().getFullYear() - FOUNDED_YEAR,
     tourists: '5,000+',
     states: 28,
     rating: '4.9',
@@ -90,11 +92,11 @@ export const SITE = {
     languages: ['English', 'Hindi', 'French', 'Spanish', 'German'],
   },
 
-  founded: 2002,
+  founded: FOUNDED_YEAR,
 
   hero: {
     busImage: 'https://res.cloudinary.com/uwzoaqhg/image/upload/v1784999341/IMG_6889_xtqsza.jpg',
-    // Currently a straight photo (street/buildings still in frame) — set to 'cutout'
+    // Currently a straight photo (street/buildings still in frame). Set to 'cutout'
     // once a background-removed .png of the same bus is uploaded.
     busImageMode: 'photo' as HeroBusImageMode,
     busImageWidth: 1024,

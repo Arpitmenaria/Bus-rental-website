@@ -6,7 +6,7 @@ import { SITE } from '@/lib/site'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — ${SITE.tagline}`,
+    default: `${SITE.name} | ${SITE.tagline}`,
     template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
@@ -23,11 +23,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@shivshaktitourist', // TODO: update with real Twitter/X handle
   },
   icons: {
     icon: '/favicon.ico',
-    // TODO: Add apple-touch-icon and other sizes
   },
 }
 

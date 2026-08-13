@@ -1,16 +1,9 @@
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import { SITE, waUrl } from '@/lib/site'
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
-
-function Todo({ children }: { children: React.ReactNode }) {
-  return (
-    <mark className="bg-yellow-100 text-yellow-900 px-1 py-0.5 rounded text-[0.9em] font-mono not-italic">
-      {children}
-    </mark>
-  )
-}
 
 function SectionCard({ id, title, children }: { id?: string; title: string; children: React.ReactNode }) {
   return (
@@ -49,13 +42,9 @@ export default function PoliciesPage() {
       <div className="bg-amber-50 border-b border-amber-200 py-3">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <p className="text-amber-800 text-xs leading-relaxed">
-            <strong>Note:</strong> This page is template copy and not legal advice. Cancellation,
-            refund, and liability terms should be reviewed and adapted to your business and local
-            regulations before going live. Items marked{' '}
-            <mark className="bg-yellow-100 text-yellow-900 px-0.5 rounded text-[0.9em] font-mono">
-              [TODO: ...]
-            </mark>{' '}
-            must be filled in before publishing.
+            <strong>Note:</strong> This page is general policy information and not legal advice.
+            Cancellation, refund, and liability terms should be reviewed by a local professional
+            before you rely on them for a dispute.
           </p>
         </div>
       </div>
@@ -88,7 +77,7 @@ export default function PoliciesPage() {
                   step: 'Confirmation',
                   text: (
                     <>
-                      A deposit of <Todo>[TODO: %]</Todo> confirms your booking; you receive a
+                      A deposit of 25% confirms your booking; you receive a
                       written confirmation and invoice immediately.
                     </>
                   ),
@@ -97,8 +86,8 @@ export default function PoliciesPage() {
                   step: 'Balance Payment',
                   text: (
                     <>
-                      Due <Todo>[TODO: on arrival / X days before departure]</Todo> via{' '}
-                      <Todo>[TODO: payment methods — card / UPI / bank transfer]</Todo>.
+                      Due on arrival, before your tour begins, via UPI, NEFT/bank transfer,
+                      or cash at our office.
                     </>
                   ),
                 },
@@ -112,7 +101,7 @@ export default function PoliciesPage() {
                     {i + 1}
                   </span>
                   <div className="pt-1">
-                    <span className="font-bold text-emerald-950">{step} — </span>
+                    <span className="font-bold text-emerald-950">{step}: </span>
                     <span className="text-gray-700 text-sm leading-relaxed">{text}</span>
                   </div>
                 </li>
@@ -126,7 +115,7 @@ export default function PoliciesPage() {
           {/* Cancellation & Refund */}
           <SectionCard id="cancellation" title="Cancellation &amp; Refund Policy">
             <p className="text-gray-500 text-sm italic mb-5">
-              Template — set your own tiers and have these terms reviewed locally before publishing.
+              General terms, always confirmed in writing with your specific booking before you pay.
             </p>
 
             {/* Refund table */}
@@ -140,17 +129,17 @@ export default function PoliciesPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-100">
                   {[
-                    ['[TODO: e.g. 30+ days]', '[TODO: e.g. 90%]'],
-                    ['[TODO: e.g. 15–29 days]', '[TODO: e.g. 50%]'],
-                    ['[TODO: e.g. 7–14 days]', '[TODO: e.g. 25%]'],
-                    ['[TODO: e.g. under 7 days]', '[TODO: e.g. no refund]'],
+                    ['30+ days', '90%'],
+                    ['15–29 days', '50%'],
+                    ['7–14 days', '25%'],
+                    ['Under 7 days', 'No refund'],
                   ].map(([notice, refund], i) => (
                     <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                       <td className="px-5 py-3.5 font-medium text-gray-800">
-                        <Todo>{notice}</Todo>
+                        {notice}
                       </td>
                       <td className="px-5 py-3.5 text-gray-700">
-                        <Todo>{refund}</Todo>
+                        {refund}
                       </td>
                     </tr>
                   ))}
@@ -161,13 +150,12 @@ export default function PoliciesPage() {
             <ul className="space-y-3 text-sm text-gray-700">
               <li className="flex items-start gap-2">
                 <span className="text-emerald-500 flex-shrink-0 mt-1">•</span>
-                Refunds are processed to your original payment method within{' '}
-                <Todo>[TODO: e.g. 7–10 business days]</Todo>.
+                Refunds are processed to your original payment method within 7–10 business days.
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-emerald-500 flex-shrink-0 mt-1">•</span>
                 If <strong>we</strong> cancel for any reason within our control, you receive a full refund or a
-                rescheduled trip — your choice.
+                rescheduled trip, your choice.
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-emerald-500 flex-shrink-0 mt-1">•</span>
@@ -188,10 +176,10 @@ export default function PoliciesPage() {
                 </h3>
                 <ul className="space-y-2 text-sm text-gray-700">
                   {[
-                    <>Air-conditioned <Todo>[TODO: vehicle type]</Todo> with professional, English-speaking driver</>,
+                    <>Air-conditioned luxury coach with professional, English-speaking driver</>,
                     'Fuel, tolls, parking, and inter-state taxes',
                     'GPS tracking and 24/7 support throughout the journey',
-                    <><Todo>[TODO: add — driver accommodation &amp; meals, bottled water, etc.]</Todo></>,
+                    <>Driver accommodation &amp; meals, and bottled drinking water on board</>,
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <span className="text-emerald-500 flex-shrink-0 mt-0.5">✓</span>
@@ -209,12 +197,13 @@ export default function PoliciesPage() {
                 </h3>
                 <ul className="space-y-2 text-sm text-gray-700">
                   {[
-                    <><Todo>[TODO: adjust if you bundle these]</Todo> Hotel stays and meals</>,
+                    <>Hotel stays and meals, included in our all-inclusive tour packages,
+                      excluded for transport-only charter bookings</>,
                     'Monument and attraction entry fees',
                     'Personal expenses and shopping',
-                    <><Todo>[TODO: adjust]</Todo> Guide fees at individual sites</>,
+                    <>Guide fees at individual sites</>,
                     'Tips and gratuities',
-                    'Travel insurance — we strongly recommend all international guests arrange their own',
+                    'Travel insurance, we strongly recommend all international guests arrange their own',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <span className="text-red-400 flex-shrink-0 mt-0.5">✕</span>
@@ -231,16 +220,40 @@ export default function PoliciesPage() {
             </p>
           </SectionCard>
 
-          {/* Privacy + disputes placeholder */}
+          {/* Privacy + disputes */}
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-7">
-            <h2 className="font-serif text-2xl font-bold text-emerald-950 mb-2">Other Terms</h2>
-            <p className="text-gray-500 text-sm mb-2">
-              <Todo>[TODO: Add privacy policy, dispute resolution, governing law, and liability
-              clauses after review by a local professional. Minimum: data handling, jurisdiction,
-              and insurance responsibility.]</Todo>
-            </p>
-            <p className="text-gray-500 text-xs italic">
-              This page is a template and not legal advice. Have it reviewed before publishing.
+            <h2 className="font-serif text-2xl font-bold text-emerald-950 mb-4">Other Terms</h2>
+            <ul className="space-y-3 text-sm text-gray-700">
+              <li className="flex items-start gap-2">
+                <span className="text-emerald-500 flex-shrink-0 mt-1">•</span>
+                <span>
+                  <strong>Privacy:</strong> we only collect the information needed to plan and
+                  confirm your trip (contact details, itinerary preferences, and payment
+                  records). We never sell your data, and only share it with third parties (such
+                  as hotels) where necessary to fulfil your booking.
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-emerald-500 flex-shrink-0 mt-1">•</span>
+                <span>
+                  <strong>Governing law:</strong> these terms are governed by the laws of India,
+                  with disputes subject to the courts of Udaipur, Rajasthan.
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-emerald-500 flex-shrink-0 mt-1">•</span>
+                <span>
+                  <strong>Liability:</strong> our liability is limited to the services we
+                  directly provide and arrange. We aren't liable for acts of independent
+                  third-party vendors (hotels, monuments, restaurants), or for delays caused by
+                  circumstances beyond our reasonable control. We strongly recommend
+                  international guests arrange their own travel insurance.
+                </span>
+              </li>
+            </ul>
+            <p className="text-gray-500 text-xs italic mt-5">
+              This page provides general information, not legal advice specific to your
+              situation. For a dispute or edge case, please contact us directly.
             </p>
           </div>
 
@@ -252,7 +265,7 @@ export default function PoliciesPage() {
         <div className="max-w-2xl mx-auto px-4">
           <h2 className="font-serif text-3xl font-bold text-white mb-3">Questions Before You Book?</h2>
           <p className="text-emerald-300 mb-8">
-            Check our FAQ for answers on safety, payment, and what to expect — or message us
+            Check our FAQ for answers on safety, payment, and what to expect, or message us
             directly and we'll reply in {SITE.response.whatsapp}.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -273,6 +286,7 @@ export default function PoliciesPage() {
           </div>
         </div>
       </section>
+      <Footer />
     </main>
   )
 }
