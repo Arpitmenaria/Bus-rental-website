@@ -6,7 +6,7 @@ const PAGE_URL = `${SITE.url}/rajasthan-tours`
 export const metadata: Metadata = {
   title: 'Rajasthan Tour Packages from Udaipur | ShivShakti Tourist',
   description:
-    '6 curated Rajasthan tour packages — Golden Circuit, Desert Safari, Heritage Express and more. From ₹9,500 per person. Transparent pricing, English guides, luxury bus.',
+    '6 curated Rajasthan tour packages: Golden Circuit, Desert Safari, Heritage Express and more. From ₹9,500 per person. Transparent pricing, English guides, luxury bus.',
   keywords: [
     'Rajasthan tour packages',
     'Udaipur to Jaipur tour',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: 'Rajasthan Tour Packages from Udaipur — ShivShakti Tourist',
+    title: 'Rajasthan Tour Packages from Udaipur | ShivShakti Tourist',
     description:
       "Explore Rajasthan's forts, palaces and deserts on a private luxury bus. 6 curated itineraries from ₹9,500. Transparent pricing, 24/7 support, English-speaking guides.",
     url: PAGE_URL,
@@ -24,18 +24,18 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     images: [
       {
-        url: `${SITE.url}/og-rajasthan-tours.jpg`, // TODO: add real OG image
-        width: 1200,
-        height: 630,
-        alt: 'Rajasthan tour packages — luxury bus from Udaipur',
+        url: SITE.hero.busImage,
+        width: SITE.hero.busImageWidth,
+        height: SITE.hero.busImageHeight,
+        alt: 'Rajasthan tour packages: luxury bus from Udaipur',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Rajasthan Tour Packages from Udaipur — ShivShakti Tourist',
+    title: 'Rajasthan Tour Packages from Udaipur | ShivShakti Tourist',
     description:
-      '6 curated packages — desert safaris, palace circuits, and heritage trails. From ₹9,500 per person.',
+      '6 curated packages: desert safaris, palace circuits, and heritage trails. From ₹9,500 per person.',
   },
 }
 

@@ -2,7 +2,7 @@ import { SITE } from '@/lib/site'
 
 /**
  * Renders only when at least one credential value is set in lib/site.ts.
- * Badge logo images go in /public/badges/<name>.png — see TODO comments below.
+ * Badge logo images go in /public/badges/<name>.png, see comments below.
  */
 export default function CredentialsStrip() {
   // Cast from literal types (as const) so runtime truthiness checks work
@@ -48,7 +48,7 @@ export default function CredentialsStrip() {
             <div className="text-center">
               <p className="text-emerald-600 text-[10px] uppercase tracking-widest mb-0.5">IATO Member</p>
               <p className="text-emerald-300 text-sm font-mono font-semibold">{iatoNumber}</p>
-              {/* TODO: Add /public/badges/iato.png and replace the text with:
+              {/* Once /public/badges/iato.png exists, replace the text above with:
               <Image src="/badges/iato.png" alt="IATO Member" width={80} height={40} className="mx-auto" />
               */}
             </div>
@@ -56,7 +56,7 @@ export default function CredentialsStrip() {
 
           {ministryApproved && (
             <div className="text-center">
-              {/* TODO: Add /public/badges/ministry-of-tourism.png and use an Image instead */}
+              {/* Once /public/badges/ministry-of-tourism.png exists, use an Image instead */}
               <div className="inline-flex items-center gap-1.5 border border-emerald-700 bg-emerald-900/60 text-emerald-300 text-xs font-semibold px-3 py-1.5 rounded-lg">
                 <span aria-hidden="true">✓</span>
                 Ministry of Tourism Approved
@@ -64,7 +64,7 @@ export default function CredentialsStrip() {
             </div>
           )}
 
-          {/* TODO: When you have badge PNGs:
+          {/* When badge PNGs are available:
               1. Copy them to /public/badges/<name>.png
               2. Import Image from 'next/image'
               3. Replace each text block above with an <Image> element

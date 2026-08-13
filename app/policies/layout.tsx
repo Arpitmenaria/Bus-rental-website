@@ -6,7 +6,7 @@ const PAGE_URL = `${SITE.url}/policies`
 export const metadata: Metadata = {
   title: 'Booking Terms, Cancellation Policy & Inclusions',
   description:
-    `How booking works, what's included, and our cancellation/refund policy — all clearly stated before you pay anything. ${SITE.name}, Udaipur.`,
+    `How booking works, what's included, and our cancellation/refund policy, all clearly stated before you pay anything. ${SITE.name}, Udaipur.`,
   keywords: [
     'tour booking terms India',
     'cancellation policy India tour',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: 'Booking Terms & Cancellation Policy — ShivShakti Tourist',
+    title: 'Booking Terms & Cancellation Policy | ShivShakti Tourist',
     description:
       'Transparent terms: how to book, deposit amounts, cancellation refund tiers, and exactly what is and isn\'t included in your quote.',
     url: PAGE_URL,
@@ -24,8 +24,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Policies — ShivShakti Tourist',
-    description: 'Clear booking terms, cancellation/refund table, and inclusions/exclusions — no surprises.',
+    title: 'Policies | ShivShakti Tourist',
+    description: 'Clear booking terms, cancellation/refund table, and inclusions/exclusions, no surprises.',
   },
 }
 

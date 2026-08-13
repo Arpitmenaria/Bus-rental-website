@@ -80,7 +80,7 @@ function buildEmailBody(p: ContactPayload): string {
     p.description.trim(),
     ``,
     `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
-    `Reply directly to this email — the reply-to address is set to the`,
+    `Reply directly to this email: the reply-to address is set to the`,
     `enquirer's email so you can respond with a single click.`,
     ``,
     `Sent via ${SITE.url}/contact`,
@@ -108,7 +108,7 @@ export async function POST(req: NextRequest): Promise<NextResponse<ContactApiRes
 
   const payload = extractPayload(raw)
 
-  // 3. Honeypot — silently succeed to fool bots
+  // 3. Honeypot: silently succeed to fool bots
   if (payload.honeypot) {
     return NextResponse.json({ ok: true, message: 'Enquiry received.' })
   }
@@ -136,8 +136,8 @@ export async function POST(req: NextRequest): Promise<NextResponse<ContactApiRes
     )
   }
 
-  // 6. Build subject — customise this line to your liking
-  const subject = `Tour Enquiry from ${payload.name.trim()}${payload.country.trim() ? ` (${payload.country.trim()})` : ''} — ${SITE.name}`
+  // 6. Build subject: customise this line to your liking
+  const subject = `Tour Enquiry from ${payload.name.trim()}${payload.country.trim() ? ` (${payload.country.trim()})` : ''} | ${SITE.name}`
 
   // 7. Submit to Web3Forms
   try {

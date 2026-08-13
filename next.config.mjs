@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 const nextConfig = {
   images: {
     // Serve AVIF where the browser supports it (smaller than WebP), fall back to WebP.
@@ -15,4 +17,4 @@ const nextConfig = {
   },
 }
 
-export default nextConfig
+export default nextConfig;

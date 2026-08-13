@@ -1,6 +1,6 @@
 import { track } from '@vercel/analytics'
 
-// Typed conversion events — call these instead of track() directly.
+// Typed conversion events: call these instead of track() directly.
 
 export type WAClickSource =
   | 'hero'

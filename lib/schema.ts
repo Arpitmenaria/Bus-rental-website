@@ -52,7 +52,7 @@ export function tourListSchema(
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'Rajasthan Tour Packages — ShivShakti Tourist',
+    name: 'Rajasthan Tour Packages | ShivShakti Tourist',
     description: 'Curated luxury bus tour packages across Rajasthan for international travellers.',
     numberOfItems: tours.length,
     itemListElement: tours.map((t, i) => ({
@@ -90,7 +90,7 @@ export function indiaTourListSchema(
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'All India Tour Packages — ShivShakti Tourist',
+    name: 'All India Tour Packages | ShivShakti Tourist',
     description: 'Luxury private bus tours across India for international travellers.',
     numberOfItems: packages.length,
     itemListElement: packages.map((p, i) => ({

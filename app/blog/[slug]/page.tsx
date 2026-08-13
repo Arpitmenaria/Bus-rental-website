@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import JsonLd from '@/components/JsonLd'
 import { SITE, waUrl } from '@/lib/site'
 import { getBlogPost, blogPosts, categoryColors } from '@/lib/blog-posts'
@@ -36,10 +37,9 @@ export async function generateMetadata({
       siteName: SITE.name,
       images: [
         {
-          // TODO: Replace with a real OG image per post
-          url: `${SITE.url}/og-image.jpg`,
-          width: 1200,
-          height: 630,
+          url: SITE.hero.busImage,
+          width: SITE.hero.busImageWidth,
+          height: SITE.hero.busImageHeight,
           alt: post.title,
         },
       ],
@@ -109,12 +109,10 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         </div>
       </section>
 
-      {/* Hero image placeholder */}
+      {/* Hero image placeholder: swap for a real photo once available */}
       <div className="bg-emerald-900 h-64 sm:h-80 flex items-center justify-center">
-        {/* TODO: Add a real hero image with next/image here */}
         <p className="text-emerald-400 text-sm font-medium">
-          📸 Hero photo coming soon — add your image to{' '}
-          <code className="bg-emerald-800 px-1.5 py-0.5 rounded text-xs">/public/blog/{post.slug}.jpg</code>
+          📸 Hero photo coming soon
         </p>
       </div>
 
@@ -122,7 +120,6 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
       <section className="py-16 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
 
-          {/* TODO notice */}
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 mb-10">
             <p className="text-amber-800 font-semibold text-sm uppercase tracking-wide mb-1">
               Content Coming Soon
@@ -136,14 +133,14 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                 className="underline font-medium hover:text-amber-800"
               >
                 WhatsApp us directly
-              </a>{' '}
-              — we reply in under 5 minutes and are happy to answer any questions about
+              </a>
+              , we reply in under 5 minutes and are happy to answer any questions about
               planning your trip.
             </p>
           </div>
 
           {/*
-           * TODO: Replace the section below with the full article body.
+           * Replace the section below with the full article body once written.
            * Recommended structure:
            *
            * ## Introduction / hook (2–3 paragraphs)
@@ -155,7 +152,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
            * ## Bottom CTA
            *
            * Aim for 1,200–1,800 words. Use <h2> and <h3> for headings,
-           * <ul>/<ol> for lists. Do not use MDX — plain JSX is fine here.
+           * <ul>/<ol> for lists. Do not use MDX; plain JSX is fine here.
            */}
           <div className="prose prose-emerald prose-lg max-w-none text-gray-700">
             <p className="lead text-gray-500 italic">
@@ -201,7 +198,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             Ready to Plan Your Trip?
           </h2>
           <p className="text-emerald-300 mb-8">
-            Tell us your travel dates and group size — we reply within 5 minutes and provide a
+            Tell us your travel dates and group size, we reply within 5 minutes and provide a
             full quote within 2 hours.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -222,6 +219,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           </div>
         </div>
       </section>
+      <Footer />
     </main>
   )
 }

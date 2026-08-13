@@ -5,8 +5,8 @@ import HeroSection from '@/components/HeroSection'
 import JsonLd from '@/components/JsonLd'
 import TrustBar from '@/components/TrustBar'
 import ReviewsSection from '@/components/ReviewsSection'
-import CredentialsStrip from '@/components/CredentialsStrip'
 import AnalyticsLink from '@/components/AnalyticsLink'
+import Footer from '@/components/Footer'
 import { SITE, waUrl } from '@/lib/site'
 import { orgSchema } from '@/lib/schema'
 import { blogPosts } from '@/lib/blog-posts'
@@ -14,7 +14,7 @@ import { blogPosts } from '@/lib/blog-posts'
 const PAGE_URL = SITE.url
 
 export const metadata: Metadata = {
-  title: `${SITE.name} — Luxury Bus Tours & Private Hire from Udaipur, Rajasthan`,
+  title: `${SITE.name} | Luxury Bus Tours & Private Hire from Udaipur, Rajasthan`,
   description:
     'GPS-tracked luxury buses, English-speaking drivers and curated tours across Rajasthan and all of India. Based in Udaipur since 2002. Get a personalised quote in 2 hours.',
   keywords: [
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: `${SITE.name} — Luxury Bus Tours from Udaipur, Rajasthan`,
+    title: `${SITE.name} | Luxury Bus Tours from Udaipur, Rajasthan`,
     description:
       `Premium private bus hire and guided tours across India. ${SITE.stats.buses}+ vehicles, ${SITE.stats.years} years experience, ${SITE.stats.tourists} international guests. Request a custom itinerary today.`,
     url: PAGE_URL,
@@ -34,16 +34,16 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     images: [
       {
-        url: `${SITE.url}/og-image.jpg`, // TODO: add a real 1200×630 OG image
-        width: 1200,
-        height: 630,
-        alt: `${SITE.name} — Luxury Bus Tours from Udaipur`,
+        url: SITE.hero.busImage,
+        width: SITE.hero.busImageWidth,
+        height: SITE.hero.busImageHeight,
+        alt: `${SITE.name} | Luxury Bus Tours from Udaipur`,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${SITE.name} — Luxury Bus Tours from Udaipur, Rajasthan`,
+    title: `${SITE.name} | Luxury Bus Tours from Udaipur, Rajasthan`,
     description:
       'GPS-tracked luxury buses, English-speaking drivers, curated tours. 12 years, 5,000+ international guests. Get a quote in 2 hours.',
   },
@@ -103,7 +103,7 @@ const packages = [
 ]
 
 const trustPoints = [
-  { icon: '📡', title: 'GPS Tracked', desc: 'Real-time tracking on every journey — share your live location with family.' },
+  { icon: '📡', title: 'GPS Tracked', desc: 'Real-time tracking on every journey: share your live location with family.' },
   { icon: '🗣️', title: 'English-Speaking Drivers', desc: 'Fluent communicators who double as knowledgeable local guides.' },
   { icon: '💬', title: '24/7 WhatsApp Support', desc: `Instant responses any time of day. We reply in ${SITE.response.whatsapp}.` },
   { icon: '💰', title: 'Transparent Pricing', desc: 'No hidden charges ever. Full quote provided before confirmation.' },
@@ -126,7 +126,7 @@ const testimonials = [
   {
     name: 'Claire Dupont',
     country: '🇫🇷 France',
-    text: 'Très professionnel! We were a group of 12 from Paris and ShivShakti organised everything seamlessly — from Udaipur to Jaisalmer. The bus was luxurious and our driver Ramji was wonderful.',
+    text: 'Très professionnel! We were a group of 12 from Paris and ShivShakti organised everything seamlessly, from Udaipur to Jaisalmer. The bus was luxurious and our driver Ramji was wonderful.',
     rating: 5,
   },
   {
@@ -151,7 +151,7 @@ export default function HomePage() {
       <Navbar />
       <JsonLd data={orgSchema()} />
 
-      {/* ── HERO (client component — 3D scene + scroll tracking) ── */}
+      {/* ── HERO (client component: 3D scene + scroll tracking) ── */}
       <HeroSection />
 
       {/* ── TRUST BAR ── */}
@@ -378,106 +378,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer className="bg-emerald-950 text-emerald-300 py-14">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-
-            {/* Brand */}
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-9 h-9 bg-emerald-600 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-serif font-bold text-lg" aria-hidden="true">S</span>
-                </div>
-                <div>
-                  <p className="font-serif font-bold text-white text-base leading-none">{SITE.name.split(' ')[0]}</p>
-                  <p className="text-emerald-400 text-xs tracking-widest uppercase">Tourist</p>
-                </div>
-              </div>
-              <p className="text-sm leading-relaxed mb-4">
-                Udaipur's most trusted luxury bus rental and tour operator serving international visitors since {SITE.founded}.
-              </p>
-              <p className="text-xs text-emerald-500">⭐ {SITE.stats.rating}/5 · {SITE.stats.reviewCount}+ reviews</p>
-            </div>
-
-            {/* Navigate */}
-            <div>
-              <h3 className="font-bold text-white mb-4 uppercase text-xs tracking-widest">Explore</h3>
-              <ul className="space-y-2 text-sm">
-                {[
-                  { label: 'Our Fleet', href: '/fleet' },
-                  { label: 'Rajasthan Tours', href: '/rajasthan-tours' },
-                  { label: 'India Tours', href: '/india-tours' },
-                  { label: 'Private Charter', href: '/charter' },
-                  { label: 'About Us', href: '/about' },
-                  { label: 'FAQ', href: '/faq' },
-                  { label: 'Booking Policies', href: '/policies' },
-                ].map((l) => (
-                  <li key={l.href}>
-                    <Link href={l.href} className="hover:text-emerald-200 transition-colors">
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Blog */}
-            <div>
-              <h3 className="font-bold text-white mb-4 uppercase text-xs tracking-widest">Travel Guides</h3>
-              <ul className="space-y-2 text-sm">
-                {blogPosts.slice(0, 5).map((post) => (
-                  <li key={post.slug}>
-                    <Link href={`/blog/${post.slug}`} className="hover:text-emerald-200 transition-colors leading-snug block">
-                      {post.title.split(':')[0]}
-                    </Link>
-                  </li>
-                ))}
-                <li>
-                  <Link href="/blog" className="text-emerald-500 hover:text-emerald-300 transition-colors font-medium">
-                    All Articles →
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <h3 className="font-bold text-white mb-4 uppercase text-xs tracking-widest">Contact</h3>
-              <ul className="space-y-3 text-sm">
-                <li className="flex items-start gap-2">
-                  <span className="text-emerald-500 flex-shrink-0 mt-0.5" aria-hidden="true">📍</span>
-                  <span>{SITE.address.street}, {SITE.address.city}, {SITE.address.state} {SITE.address.pincode}</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-emerald-500" aria-hidden="true">📞</span>
-                  <AnalyticsLink href={`tel:+${SITE.phone.wa}`} event="phone_click" source="footer" className="hover:text-white transition-colors">{SITE.phone.display}</AnalyticsLink>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-emerald-500" aria-hidden="true">✉</span>
-                  <AnalyticsLink href={`mailto:${SITE.email.main}`} event="email_click" source="footer" className="hover:text-white transition-colors">{SITE.email.main}</AnalyticsLink>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-emerald-500" aria-hidden="true">🕐</span>
-                  <span>24/7 WhatsApp Support</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-emerald-800 pt-6">
-            <CredentialsStrip />
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4">
-              <p className="text-xs text-emerald-400">© {new Date().getFullYear()} {SITE.name}. All rights reserved.</p>
-              <div className="flex items-center gap-4 text-xs text-emerald-400">
-                <Link href="/faq" className="hover:text-emerald-200 transition-colors">FAQ</Link>
-                <Link href="/policies" className="hover:text-emerald-200 transition-colors">Policies</Link>
-                <span>Made with ♥ in Udaipur</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </main>
   )
 }

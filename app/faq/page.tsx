@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import JsonLd from '@/components/JsonLd'
 import { SITE, waUrl } from '@/lib/site'
 import { faqSchema } from '@/lib/schema'
@@ -9,7 +10,7 @@ import { faqSchema } from '@/lib/schema'
 const SAFETY: Array<{ q: string; a: string; highlight?: boolean }> = [
   {
     q: 'Will I be pressured into shops, "emporiums," or detours for commissions?',
-    a: 'No — and we say this plainly because we know it\'s the most common complaint about road travel in India. Our drivers earn a fair, fixed wage. They are not paid shop commissions, and they will never reroute you to a store, "government emporium," or relative\'s business. You go where your itinerary says, full stop. If you\'d like to shop, tell us and we\'ll take you somewhere genuinely worth your time.',
+    a: 'No, and we say this plainly because we know it\'s the most common complaint about road travel in India. Our drivers earn a fair, fixed wage. They are not paid shop commissions, and they will never reroute you to a store, "government emporium," or relative\'s business. You go where your itinerary says, full stop. If you\'d like to shop, tell us and we\'ll take you somewhere genuinely worth your time.',
     highlight: true,
   },
   {
@@ -26,22 +27,22 @@ const SAFETY: Array<{ q: string; a: string; highlight?: boolean }> = [
   },
   {
     q: "How do I know you're a real, registered company?",
-    a: 'We\'re a registered tour operator based in Udaipur. Our GST number, business registration, and tourism credentials are listed on this site, our office address is on Google Maps, and you can read verified reviews from past guests on Google and TripAdvisor.',
+    a: 'We\'re a registered tour operator based in Udaipur. Our office address is on Google Maps, we\'re reachable by phone and WhatsApp, and you can read verified reviews from past guests on Google and TripAdvisor. We\'re happy to share our GST and registration details on request before you book.',
   },
 ]
 
 const BOOKING: Array<{ q: string; a: string }> = [
   {
     q: 'How do I pay, and is it secure?',
-    a: 'You can pay by [TODO: card / UPI / bank transfer / Razorpay / Stripe — list your real methods]. Payments are processed through secure, recognised gateways. We\'ll always send a written confirmation and a proper invoice — never an informal "pay cash to the driver" arrangement for the booking itself.',
+    a: 'You can pay by UPI, NEFT/bank transfer, or cash at our office. We\'ll always send a written confirmation and a proper invoice, never an informal "pay cash to the driver" arrangement for the booking itself.',
   },
   {
     q: 'Do I need to pay the full amount upfront?',
-    a: 'No. We take a deposit of [TODO: e.g. 20–30%] to confirm your booking, with the balance due [TODO: e.g. on arrival / X days before travel]. Exact terms are confirmed in writing before you pay anything.',
+    a: 'No. We take a deposit of 25% to confirm your booking, with the balance due on arrival, before your tour begins. Exact terms are confirmed in writing before you pay anything.',
   },
   {
     q: 'How far in advance should I book?',
-    a: 'For peak season (October–March) we recommend booking [TODO: e.g. 4–6 weeks] ahead. Off-peak and last-minute trips are often possible — just message us and we\'ll check availability.',
+    a: 'For peak season (October–March) we recommend booking 4–6 weeks ahead. Off-peak and last-minute trips are often possible, just message us and we\'ll check availability.',
   },
   {
     q: 'Can I customise the itinerary?',
@@ -52,23 +53,23 @@ const BOOKING: Array<{ q: string; a: string }> = [
 const ON_THE_ROAD: Array<{ q: string; a: string }> = [
   {
     q: "What's included in the price, and what isn't?",
-    a: 'See our Policies page for the full breakdown. In short: the vehicle, driver, fuel, tolls, and parking are included; personal expenses, entry tickets, meals, and tips are typically not — and we always tell you upfront so there are no surprises.',
+    a: 'See our Policies page for the full breakdown. In short: the vehicle, driver, fuel, tolls, and parking are included; personal expenses, entry tickets, meals, and tips are typically not, and we always tell you upfront so there are no surprises.',
   },
   {
     q: 'Do you arrange hotels, or only transport?',
-    a: '[TODO: choose one] We arrange the full package including vetted hotels / We focus on premium transport and can recommend trusted hotels, leaving the booking to you.',
+    a: 'For our tour packages, we arrange the full package including vetted hotels, meals, and guides, exactly as listed in your itinerary. If you only need a vehicle and driver, for a charter or transport-only booking, we\'re glad to recommend trusted hotels and leave the booking to you.',
   },
   {
-    q: "What if something goes wrong during the trip — a breakdown or emergency?",
+    q: "What if something goes wrong during the trip, like a breakdown or emergency?",
     a: "You'll have a direct 24/7 contact with our team for the whole journey. Our fleet is regularly serviced, and in the rare event of a vehicle issue we arrange a prompt replacement so your plans stay on track.",
   },
   {
     q: 'What about luggage, and amenities on the bus?',
-    a: '[TODO: describe luggage capacity and onboard amenities — AC, charging points, water, reclining seats, wifi, etc.]',
+    a: 'Every bus in our fleet has a dedicated luggage bay or under-bus hold, so there\'s no need to travel light. Onboard you\'ll find AC, mobile charging points, bottled water, blankets, and reclining or push-back seats with reading lights, plus large windows for sightseeing.',
   },
   {
     q: 'Are tips expected?',
-    a: 'Tipping is appreciated but never required, and it\'s always your choice. As a guide, [TODO: e.g. ₹X–Y per day for the driver] is customary if you\'ve had a good experience.',
+    a: 'Tipping is appreciated but never required, and it\'s always your choice. As a guide, ₹200–300 per day for the driver is customary if you\'ve had a good experience.',
   },
   {
     q: 'Can you cater to dietary needs (vegetarian, vegan, allergies)?',
@@ -76,7 +77,7 @@ const ON_THE_ROAD: Array<{ q: string; a: string }> = [
   },
 ]
 
-// All Q&A for JSON-LD (plain text, TODO markers preserved)
+// All Q&A for JSON-LD
 const ALL_FAQ = [
   ...SAFETY.map(({ q, a }) => ({ question: q, answer: a })),
   ...BOOKING.map(({ q, a }) => ({ question: q, answer: a })),
@@ -85,24 +86,8 @@ const ALL_FAQ = [
 
 // ── Components ────────────────────────────────────────────────────────────────
 
-function Todo({ children }: { children: React.ReactNode }) {
-  return (
-    <mark className="bg-yellow-100 text-yellow-900 px-1 py-0.5 rounded text-[0.9em] font-mono not-italic">
-      {children}
-    </mark>
-  )
-}
-
-/** Replaces [TODO: ...] markers in answer text with a styled <Todo> element. */
 function AnswerText({ text }: { text: string }) {
-  const parts = text.split(/(\[TODO:[^\]]+\])/g)
-  return (
-    <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
-      {parts.map((part, i) =>
-        part.startsWith('[TODO:') ? <Todo key={i}>{part}</Todo> : part
-      )}
-    </p>
-  )
+  return <p className="text-gray-700 leading-relaxed text-sm sm:text-base">{text}</p>
 }
 
 function FaqItem({
@@ -192,13 +177,13 @@ export default function FaqPage() {
             Frequently Asked Questions
           </h1>
           <p className="text-emerald-200 text-lg">
-            We answer the questions wary travellers actually ask — including the ones most
+            We answer the questions wary travellers actually ask, including the ones most
             operators avoid.
           </p>
         </div>
       </section>
 
-      {/* Commission callout — pinned at the top as the most critical trust signal */}
+      {/* Commission callout: pinned at the top as the most critical trust signal */}
       <section className="bg-white border-b border-gray-100 py-8">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-emerald-950 rounded-2xl p-6 text-white flex gap-4">
@@ -207,7 +192,7 @@ export default function FaqPage() {
               <p className="font-bold text-lg mb-1">Our No-Commission Promise</p>
               <p className="text-emerald-300 text-sm leading-relaxed">
                 Our drivers earn a fixed salary. They are never paid commissions from shops,
-                "government emporiums," or restaurants. Your itinerary is yours — no detours, no
+                "government emporiums," or restaurants. Your itinerary is yours, no detours, no
                 pressure, no third-party kickbacks. This is the most common concern for road travel
                 in India, so we say it plainly.
               </p>
@@ -234,7 +219,7 @@ export default function FaqPage() {
           <h2 className="font-serif text-3xl font-bold text-white mb-3">Still have a question?</h2>
           <p className="text-emerald-300 mb-8">
             We reply in {SITE.response.whatsapp} on WhatsApp and within {SITE.response.email} by
-            email. Ask us anything — no question is too small.
+            email. Ask us anything, no question is too small.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
@@ -264,6 +249,7 @@ export default function FaqPage() {
           </p>
         </div>
       </section>
+      <Footer />
     </main>
   )
 }
