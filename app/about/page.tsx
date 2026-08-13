@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import JsonLd from '@/components/JsonLd'
 import { SITE, waUrl } from '@/lib/site'
 import { orgSchema } from '@/lib/schema'
@@ -7,7 +8,7 @@ import { orgSchema } from '@/lib/schema'
 const PAGE_URL = `${SITE.url}/about`
 
 export const metadata: Metadata = {
-  title: `About ${SITE.name} — Udaipur Luxury Bus Operator Since ${SITE.founded}`,
+  title: `About ${SITE.name} | Udaipur Luxury Bus Operator Since ${SITE.founded}`,
   description: `Est. ${SITE.founded} in Udaipur. ${SITE.name} has served ${SITE.stats.tourists} international travellers across ${SITE.stats.states} states. Meet our team and read our story.`,
   keywords: [
     'about ShivShakti Tourist',
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: `About ${SITE.name} — ${SITE.stats.years} Years Serving International Travellers`,
+    title: `About ${SITE.name} | ${SITE.stats.years} Years Serving International Travellers`,
     description: `Founded in ${SITE.founded} by Kailash Chandra Menaria, ${SITE.name} is Udaipur's most trusted luxury bus operator. ${SITE.stats.tourists} guests from ${SITE.stats.countries} countries served.`,
     url: PAGE_URL,
     type: 'website',
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `About ${SITE.name} — Udaipur Luxury Bus Operator`,
+    title: `About ${SITE.name} | Udaipur Luxury Bus Operator`,
     description: `Est. ${SITE.founded}. ${SITE.stats.tourists} international guests. ${SITE.stats.years} years of service. Meet the team behind Rajasthan's most trusted bus tours.`,
   },
 }
@@ -43,7 +44,7 @@ const stats = [
 
 const timeline = [
   { year: '2002', title: 'Founded in Udaipur', desc: 'Kailash Chandra Menaria starts ShivShakti Tourist with a single Tata bus and a dream of serving international travellers.' },
-  { year: '2015', title: 'First Sleeper Bus Acquired', desc: "The first AC sleeper coach joins the fleet — signalling the company's move into luxury tourism." },
+  { year: '2015', title: 'First Sleeper Bus Acquired', desc: "The first AC sleeper coach joins the fleet, signalling the company's move into luxury tourism." },
   { year: '2018', title: 'All India Operations', desc: 'Team expands to 12 people, operations extend beyond Rajasthan to cover Delhi, Agra, Varanasi, and Mumbai routes.' },
   { year: '2021', title: 'GPS & Digital Upgrade', desc: 'All buses equipped with real-time GPS tracking and WhatsApp-based booking support. Paperless documentation.' },
   { year: '2023', title: 'Ultra Luxury Fleet Expansion', desc: 'The 58-seater push-back ultra luxury coach and 48-sleeper ultra luxury bus join the fleet. 5000th international tourist milestone achieved.' },
@@ -94,7 +95,7 @@ export default function AboutPage() {
           <p className="text-emerald-400 font-semibold text-sm tracking-widest uppercase mb-4">Est. 2002 · Udaipur, Rajasthan</p>
           <h1 className="font-serif text-5xl lg:text-7xl font-bold text-white mb-6">Our Story</h1>
           <p className="text-emerald-200 text-xl leading-relaxed max-w-3xl mx-auto">
-            ShivShakti Tourist was born from a single conviction: that international visitors deserve to experience India not just as tourists, but as honoured guests — with comfort, safety, and genuine human connection at every mile.
+            ShivShakti Tourist was born from a single conviction: that international visitors deserve to experience India not just as tourists, but as honoured guests, with comfort, safety, and genuine human connection at every mile.
           </p>
         </div>
       </section>
@@ -120,13 +121,13 @@ export default function AboutPage() {
           <h2 className="font-serif text-3xl font-bold text-emerald-950 mb-6">The Founding Story</h2>
           <div className="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              In 2002, Kailash Chandra Menaria — a young man from Udaipur with a passion for his homeland — noticed that international tourists were arriving in Rajasthan but struggling to explore it properly. Hired cabs were unreliable, language barriers were frustrating, and the true magic of places like Kumbhalgarh, Ranakpur, and Sam Dunes remained out of reach.
+              In 2002, Kailash Chandra Menaria, a young man from Udaipur with a passion for his homeland, noticed that international tourists were arriving in Rajasthan but struggling to explore it properly. Hired cabs were unreliable, language barriers were frustrating, and the true magic of places like Kumbhalgarh, Ranakpur, and Sam Dunes remained out of reach.
             </p>
             <p>
               He invested his savings in a single Tata bus, learned English from YouTube videos and curious tourists, and started offering guided day trips out of Udaipur. Word spread quickly. A French couple told their friends. A British travel blogger wrote a glowing post. Within two years, ShivShakti Tourist had a waiting list.
             </p>
             <p>
-              Today, with seven vehicles, a team of 20, and guests from over 40 countries, the mission remains unchanged: give every international visitor the royal Rajasthan experience they deserve — with zero stress, zero hidden costs, and a driver who feels like a friend by journey's end.
+              Today, with seven vehicles, a team of 20, and guests from over 40 countries, the mission remains unchanged: give every international visitor the royal Rajasthan experience they deserve, with zero stress, zero hidden costs, and a driver who feels like a friend by journey's end.
             </p>
           </div>
         </div>
@@ -205,6 +206,7 @@ export default function AboutPage() {
           </a>
         </div>
       </section>
+      <Footer />
     </main>
   )
 }

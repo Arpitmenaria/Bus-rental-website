@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import JsonLd from '@/components/JsonLd'
 import { waUrl } from '@/lib/site'
 import { tourListSchema } from '@/lib/schema'
@@ -12,7 +13,7 @@ interface Tour {
   title: string
   duration: string
   price: string
-  priceUSD: string | null // TODO: add USD equivalent before going live, e.g. '$340'
+  priceUSD: string | null
   priceNote: string
   route: string[]
   gradient: string
@@ -26,7 +27,7 @@ const tours: Tour[] = [
     title: 'Golden Rajasthan Circuit',
     duration: '7 Days / 6 Nights',
     price: '₹28,000',
-    priceUSD: null, // TODO: e.g. '$340'
+    priceUSD: '$340',
     priceNote: 'per person (min 2)',
     route: ['Udaipur', 'Jodhpur', 'Jaisalmer', 'Jaipur'],
     gradient: 'from-amber-500 to-orange-600',
@@ -54,13 +55,13 @@ const tours: Tour[] = [
     title: 'Royal Heritage Express',
     duration: '5 Days / 4 Nights',
     price: '₹18,500',
-    priceUSD: null, // TODO: e.g. '$225'
+    priceUSD: '$225',
     priceNote: 'per person (min 2)',
     route: ['Udaipur', 'Chittorgarh', 'Pushkar', 'Ajmer'],
     gradient: 'from-rose-600 to-rose-800',
     tag: 'Cultural',
     highlights: [
-      'Chittorgarh Fort — largest fort in India',
+      'Chittorgarh Fort: largest fort in India',
       'Vijay Stambha tower at sunset',
       "Pushkar Brahma Temple (world's rarest)",
       'Pushkar Lake camel rides',
@@ -81,7 +82,7 @@ const tours: Tour[] = [
     title: 'Desert Safari Special',
     duration: '4 Days / 3 Nights',
     price: '₹16,000',
-    priceUSD: null, // TODO: e.g. '$195'
+    priceUSD: '$195',
     priceNote: 'per person (min 2)',
     route: ['Jodhpur', 'Jaisalmer', 'Sam Dunes'],
     gradient: 'from-yellow-600 to-amber-700',
@@ -106,7 +107,7 @@ const tours: Tour[] = [
     title: 'Udaipur Lakes & Palaces',
     duration: '3 Days / 2 Nights',
     price: '₹9,500',
-    priceUSD: null, // TODO: e.g. '$115'
+    priceUSD: '$115',
     priceNote: 'per person (min 2)',
     route: ['Udaipur', 'Kumbhalgarh', 'Ranakpur'],
     gradient: 'from-teal-600 to-emerald-700',
@@ -132,7 +133,7 @@ const tours: Tour[] = [
     title: 'Shekhawati Open Art Gallery',
     duration: '3 Days / 2 Nights',
     price: '₹12,000',
-    priceUSD: null, // TODO: e.g. '$145'
+    priceUSD: '$145',
     priceNote: 'per person (min 2)',
     route: ['Jaipur', 'Nawalgarh', 'Mandawa', 'Fatehpur'],
     gradient: 'from-indigo-600 to-violet-700',
@@ -157,7 +158,7 @@ const tours: Tour[] = [
     title: 'Complete Rajasthan Grand Tour',
     duration: '14 Days / 13 Nights',
     price: '₹58,000',
-    priceUSD: null, // TODO: e.g. '$700'
+    priceUSD: '$700',
     priceNote: 'per person (min 2)',
     route: ['Udaipur', 'Chittorgarh', 'Pushkar', 'Jaipur', 'Shekhawati', 'Bikaner', 'Jaisalmer', 'Jodhpur'],
     gradient: 'from-emerald-700 to-emerald-950',
@@ -296,7 +297,7 @@ export default function RajasthanToursPage() {
       <section className="py-14 bg-emerald-950 text-center">
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="font-serif text-3xl font-bold text-white mb-3">Need a Custom Itinerary?</h2>
-          <p className="text-emerald-300 mb-8">We build bespoke tours around your interests, budget, and dates. No cookie-cutter packages — just the Rajasthan you've always imagined.</p>
+          <p className="text-emerald-300 mb-8">We build bespoke tours around your interests, budget, and dates. No cookie-cutter packages, just the Rajasthan you've always imagined.</p>
           <a
             href={WA}
             target="_blank"
@@ -307,6 +308,7 @@ export default function RajasthanToursPage() {
           </a>
         </div>
       </section>
+      <Footer />
     </main>
   )
 }

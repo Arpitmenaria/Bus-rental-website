@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import JsonLd from '@/components/JsonLd'
 import { SITE, waUrl } from '@/lib/site'
 import { orgSchema } from '@/lib/schema'
@@ -7,28 +9,28 @@ import { orgSchema } from '@/lib/schema'
 const PAGE_URL = `${SITE.url}/fleet`
 
 export const metadata: Metadata = {
-  title: 'Luxury Bus Fleet for Hire — Volvo Sleeper, VIP Coach & More | ShivShakti Tourist',
-  description: `${SITE.stats.buses} GPS-tracked luxury buses for hire in Udaipur — Volvo sleepers, VIP coaches, and minivans. Rates from ₹10/km. English-speaking drivers and 24/7 support included.`,
+  title: 'Luxury Bus Fleet for Hire: Sleeper, Seater & Mini Coaches | ShivShakti Tourist',
+  description: `${SITE.stats.buses} fully-AC, GPS-tracked buses for hire in Udaipur: 2x2 sleepers, push-back coaches, and mini buses from 32 to 58 seats. Rates from ₹35/km. Water bottles, charging sockets & blankets on every trip.`,
   keywords: [
     'luxury bus hire Udaipur',
-    'Volvo bus rental Rajasthan',
-    'private bus charter India',
-    'sleeper bus hire Rajasthan',
-    'VIP coach hire Udaipur',
+    'sleeper bus rental Rajasthan',
+    'push back coach hire Udaipur',
+    'AC bus hire Rajasthan',
+    'mini bus hire Udaipur',
   ],
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: 'Luxury Bus Fleet for Hire — Volvo, Scania, Mercedes | ShivShakti Tourist',
+    title: 'Luxury Bus Fleet for Hire | ShivShakti Tourist',
     description:
-      'Volvo 9400 Sleepers, Scania Seaters, VIP coaches and 12-seat vans — all GPS-tracked with verified professional drivers. Rates from ₹10/km, transparent pricing.',
+      '2x2 sleeper coaches, push-back ultra luxury coaches, and mini buses, all GPS-tracked with verified professional drivers. Rates from ₹35/km, transparent pricing.',
     url: PAGE_URL,
     type: 'website',
     siteName: SITE.name,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Luxury Bus Fleet for Hire — ShivShakti Tourist, Udaipur',
-    description: `${SITE.stats.buses} GPS-tracked buses from ₹10/km. Volvo sleepers, VIP coaches, minivans. English-speaking drivers. Serving international groups across India.`,
+    title: 'Luxury Bus Fleet for Hire | ShivShakti Tourist, Udaipur',
+    description: `${SITE.stats.buses} GPS-tracked, fully-AC buses from ₹35/km. Sleeper coaches, push-back seaters, mini buses. Serving international groups across India.`,
   },
 }
 
@@ -37,9 +39,8 @@ const WA = waUrl('Hi ShivShakti, I am interested in hiring a bus.')
 interface Bus {
   name: string
   type: string
-  emoji: string
+  photo: string
   price: string
-  priceUSD: string | null // TODO: add USD/km equivalent before going live
   capacity: string
   amenities: string[]
   features: string[]
@@ -49,137 +50,113 @@ interface Bus {
 
 const buses: Bus[] = [
   {
-    name: 'Volvo 9400 Sleeper',
-    type: 'AC Luxury Sleeper',
-    emoji: '🛏️',
-    price: '₹18/km',
-    priceUSD: null, // TODO: e.g. '$0.22/km'
-    capacity: '36 berths',
-    amenities: ['AC', 'WiFi', 'Washroom', 'USB Charging', 'Reading Lights', 'Blankets'],
+    name: '48 Sleeper 2×2 Ultra Luxury AC Bus',
+    type: 'Ultra Luxury AC Sleeper',
+    photo:
+      'https://res.cloudinary.com/uwzoaqhg/image/upload/v1783355296/ChatGPT_Image_Apr_5_2026_11_08_02_PM_f9qpfj.png',
+    price: '₹35/km',
+    capacity: '48 berths (2×2)',
+    amenities: ['AC', 'GPS Live Tracking', 'Charging Sockets', 'Water Bottles', 'Blankets', 'Curtained Berths'],
     features: [
-      'Individual curtained berths (upper & lower)',
-      'Plush mattress & pillow included',
-      'Personal reading lamp per berth',
-      'Mobile charging at every berth',
-      'Onboard washroom & vanity mirror',
-      'Emergency exits on both sides',
+      'Individual curtained sleeper berths (2×2 layout)',
+      'Plush mattress, pillow & blanket in every berth',
+      'Personal reading light per berth',
+      'Mobile charging socket at every berth',
+      'Live GPS tracking shared with you throughout the trip',
+      'Top-tier finish for long overnight journeys',
     ],
-    routes: 'Udaipur ↔ Jaipur · Rajasthan Circuits · Delhi ↔ Mumbai',
+    routes: 'Overnight interstate travel · Rajasthan circuits · Large group sleeper tours',
     gradient: 'from-emerald-700 to-emerald-900',
   },
   {
-    name: 'Volvo B11R Sleeper',
-    type: 'AC Luxury Sleeper',
-    emoji: '🌙',
-    price: '₹20/km',
-    priceUSD: null, // TODO: e.g. '$0.24/km'
-    capacity: '40 berths',
-    amenities: ['AC', 'WiFi', 'Washroom', 'USB Charging', 'Entertainment'],
+    name: '50 Sleeper Luxury 2×2 AC Sleeper Bus',
+    type: 'Luxury AC Sleeper',
+    photo: 'https://res.cloudinary.com/uwzoaqhg/image/upload/v1784999341/IMG_6889_xtqsza.jpg',
+    price: '₹35/km',
+    capacity: '50 berths (2×2)',
+    amenities: ['AC', 'GPS Live Tracking', 'Charging Sockets', 'Water Bottles', 'Blankets', 'Curtained Berths'],
     features: [
-      'Premium 2+1 berth configuration',
-      '180° full-flat recline sleepers',
-      'Individual entertainment screens',
-      'Onboard pantry with beverages',
-      'GPS tracking & live sharing',
-      'Professional co-driver for safety',
+      '2×2 sleeper berth configuration for extra capacity',
+      'Cushioned mattress, pillow & blanket included',
+      'Curtained berths for complete privacy',
+      'Charging point at every berth',
+      'Live GPS tracking on every trip',
+      'Ideal for large overnight group movements',
     ],
-    routes: 'Long-distance overnight runs · North India circuits',
+    routes: 'Long-distance overnight runs · Pilgrimages · Interstate group travel',
     gradient: 'from-slate-700 to-slate-900',
   },
   {
-    name: 'Scania Metabus Seater',
-    type: 'AC Luxury Seater',
-    emoji: '💺',
-    price: '₹14/km',
-    priceUSD: null, // TODO: e.g. '$0.17/km'
-    capacity: '45 seats',
-    amenities: ['AC', 'WiFi', 'USB Charging', 'Luggage Space'],
+    name: '58 Seater Push Back Ultra Luxury Coach',
+    type: 'Ultra Luxury Push-Back Coach',
+    photo: 'https://res.cloudinary.com/uwzoaqhg/image/upload/v1783355531/bus1_cjczru.png',
+    price: '₹35/km',
+    capacity: '58 seats',
+    amenities: ['AC', 'GPS Live Tracking', 'Charging Sockets', 'Water Bottles', 'Blankets', 'Push-Back Seats'],
     features: [
-      'Wide recliner seats with leg rest',
-      'Panoramic tinted windows',
-      'Overhead luggage racks',
-      'Individual air vents per seat',
-      'Onboard PA system',
-      'Safety seatbelts for all seats',
+      'Wide push-back reclining seats with leg rest',
+      'Individual reading lights & air vents',
+      'Large tinted windows for sightseeing',
+      'Ample overhead & under-bus luggage space',
+      'Live GPS tracking shared with you throughout the trip',
+      'Built for large corporate, wedding & tour groups',
     ],
-    routes: 'City tours · Day excursions · Heritage circuits',
+    routes: 'Weddings · Corporate retreats · Large tour groups · Day & overnight trips',
+    gradient: 'from-amber-700 to-amber-900',
+  },
+  {
+    name: '52 Seater Luxury AC Bus',
+    type: 'Luxury AC Seater',
+    photo: 'https://res.cloudinary.com/uwzoaqhg/image/upload/v1783355498/56seat_wyxir2.png',
+    price: '₹35/km',
+    capacity: '52 seats',
+    amenities: ['AC', 'GPS Live Tracking', 'Charging Sockets', 'Water Bottles', 'Blankets', 'Push-Back Seats'],
+    features: [
+      'Comfortable push-back seats with leg room',
+      'Overhead luggage racks & individual air vents',
+      'Large windows for sightseeing',
+      'Mobile charging sockets throughout the cabin',
+      'Live GPS tracking on every trip',
+      'Well suited for medium-to-large groups',
+    ],
+    routes: 'City tours · Pilgrimage groups · School & college trips · Day excursions',
     gradient: 'from-teal-700 to-teal-900',
   },
   {
-    name: 'Mercedes Touro',
-    type: 'AC Semi-Sleeper',
-    emoji: '⭐',
-    price: '₹13/km',
-    priceUSD: null, // TODO: e.g. '$0.16/km'
-    capacity: '40 seats',
-    amenities: ['AC', 'WiFi', 'USB Charging', 'Cooler'],
-    features: [
-      'European-built coach interior',
-      'Semi-sleeper reclining seats',
-      'Under-seat storage drawers',
-      'Onboard chilled water dispenser',
-      'LED ambient lighting',
-      'Audio/video entertainment',
-    ],
-    routes: 'Rajasthan circuits · Goa · Mumbai · Pune',
-    gradient: 'from-violet-700 to-violet-900',
-  },
-  {
-    name: 'Tata Starbus',
+    name: '45 Seater AC Bus',
     type: 'AC Seater',
-    emoji: '🚌',
-    price: '₹10/km',
-    priceUSD: null, // TODO: e.g. '$0.12/km'
-    capacity: '49 seats',
-    amenities: ['AC', 'USB Charging', 'Luggage Space'],
+    photo: 'https://res.cloudinary.com/uwzoaqhg/image/upload/v1784999597/IMG_1199_imnwo3.jpg',
+    price: '₹35/km',
+    capacity: '45 seats',
+    amenities: ['AC', 'GPS Live Tracking', 'Charging Sockets', 'Water Bottles', 'Blankets', 'Reclining Seats'],
     features: [
-      'Economical group transport',
-      'Push-back recliner seats',
-      'Large luggage bays',
-      'Air-suspended smooth ride',
-      'Durable for all Indian roads',
-      'Available for local city trips',
+      'Cushioned reclining seats for comfortable travel',
+      'Large windows for uninterrupted sightseeing',
+      'Mobile charging sockets on board',
+      'Dedicated luggage bay',
+      'Live GPS tracking shared with you throughout the trip',
+      'Reliable choice for mid-size groups',
     ],
-    routes: 'Educational tours · Pilgrimages · Budget groups',
+    routes: 'Local sightseeing · Pilgrimage tours · Educational trips · Mid-size groups',
     gradient: 'from-orange-700 to-orange-900',
   },
   {
-    name: 'Force Traveller Van',
-    type: 'AC Minivan',
-    emoji: '🚐',
-    price: '₹18/km',
-    priceUSD: null, // TODO: e.g. '$0.22/km'
-    capacity: '12 seats',
-    amenities: ['AC', 'USB Charging', 'Cooler'],
+    name: '32 Seater AC Mini Bus',
+    type: 'AC Mini Coach',
+    photo: 'https://res.cloudinary.com/uwzoaqhg/image/upload/v1784999798/IMG_1200_q7kvwm.jpg',
+    price: '₹35/km',
+    capacity: '32 seats',
+    amenities: ['AC', 'GPS Live Tracking', 'Charging Sockets', 'Water Bottles', 'Blankets', 'Compact & Agile'],
     features: [
-      'Perfect for small private groups',
-      'High-roof for extra headroom',
-      'Customisable seating arrangement',
-      'Airport pickup & drop specialist',
-      'Narrow road capable (hill stations)',
-      'Dedicated personal driver',
+      'Compact size, easy on narrow & hill roads',
+      'Comfortable reclining seats',
+      'Mobile charging sockets on board',
+      'Live GPS tracking shared with you throughout the trip',
+      'Personal, dedicated driver for smaller groups',
+      'Ideal for airport transfers & family/corporate groups',
     ],
-    routes: 'Airport transfers · Small groups · Udaipur local',
+    routes: 'Airport transfers · Small family & corporate groups · Hill station trips',
     gradient: 'from-rose-700 to-rose-900',
-  },
-  {
-    name: 'Volvo 9600 VIP',
-    type: 'VIP Luxury Seater',
-    emoji: '👑',
-    price: '₹25/km',
-    priceUSD: null, // TODO: e.g. '$0.30/km'
-    capacity: '36 seats (2+1)',
-    amenities: ['AC', 'WiFi', 'Washroom', 'USB Charging', 'Bar', 'Entertainment'],
-    features: [
-      'Ultra-wide 2+1 seating configuration',
-      'Full-leather premium seats',
-      'Onboard bar with refrigerator',
-      'Individual HD entertainment screens',
-      'Concierge-style onboard service',
-      'Starlight LED cabin ambience',
-    ],
-    routes: 'Weddings · Corporate retreats · VIP transfers · Film shoots',
-    gradient: 'from-amber-700 to-amber-900',
   },
 ]
 
@@ -192,10 +169,19 @@ export default function FleetPage() {
       {/* Hero */}
       <section className="bg-gradient-to-br from-emerald-950 to-emerald-800 pt-32 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-emerald-400 font-semibold text-sm tracking-widest uppercase mb-3">7 Vehicles</p>
+          <p className="text-emerald-400 font-semibold text-sm tracking-widest uppercase mb-3">{SITE.stats.buses} Vehicles</p>
           <h1 className="font-serif text-5xl lg:text-6xl font-bold text-white mb-4">Our Fleet</h1>
           <p className="text-emerald-200 text-lg max-w-2xl mx-auto">
-            From intimate 12-seat vans to 49-seat group coaches — every vehicle is meticulously maintained, GPS-tracked, and driven by a verified professional.
+            From 32-seat mini coaches to 58-seat luxury coaches, every vehicle is meticulously maintained, GPS-tracked, and driven by a verified professional.
+          </p>
+        </div>
+      </section>
+
+      {/* AC + Fan note */}
+      <section className="bg-emerald-50 border-b border-emerald-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <p className="text-center text-sm text-emerald-800">
+            <span className="font-semibold">❄️ Every bus is fully air-conditioned.</span> Prefer non-AC on a hill route or a cool evening? We simply switch off the AC and run the individual seat fan fitted at every seat, at no extra cost.
           </p>
         </div>
       </section>
@@ -203,32 +189,38 @@ export default function FleetPage() {
       {/* Fleet Cards */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          {buses.map((bus) => (
+          {buses.map((bus, i) => (
             <div key={bus.name} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
-              <div className="grid md:grid-cols-[320px_1fr]">
-                {/* Left gradient panel */}
-                <div className={`bg-gradient-to-br ${bus.gradient} p-8 flex flex-col justify-between`}>
-                  <div>
-                    <div className="text-5xl mb-4">{bus.emoji}</div>
-                    <h2 className="font-serif text-2xl font-bold text-white mb-1">{bus.name}</h2>
-                    <p className="text-white/70 text-sm mb-6">{bus.type}</p>
+              <div className="grid md:grid-cols-[360px_1fr]">
+                {/* Left photo + price panel */}
+                <div className="flex flex-col">
+                  <div className="relative h-64 md:h-72 bg-gray-200">
+                    <Image
+                      src={bus.photo}
+                      alt={bus.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 360px"
+                      className="object-cover"
+                      priority={i === 0}
+                    />
                   </div>
-                  <div>
-                    <p className="text-white/60 text-xs uppercase tracking-widest mb-1">Starting from</p>
-                    <p className="font-serif text-4xl font-bold text-white">{bus.price}</p>
-                    {bus.priceUSD ? (
-                      <p className="text-white/60 text-sm mt-0.5">≈ {bus.priceUSD}</p>
-                    ) : (
-                      <p className="text-amber-300/70 text-[10px] font-mono mt-0.5">[TODO: USD]</p>
-                    )}
-                    <a
-                      href={waUrl(`Hi, I'm interested in the ${bus.name}.`)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block mt-4 bg-white/20 hover:bg-white/30 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors"
-                    >
-                      Enquire Now
-                    </a>
+                  <div className={`bg-gradient-to-br ${bus.gradient} p-8 flex-1 flex flex-col justify-between`}>
+                    <div>
+                      <h2 className="font-serif text-2xl font-bold text-white mb-1">{bus.name}</h2>
+                      <p className="text-white/70 text-sm">{bus.type}</p>
+                    </div>
+                    <div className="mt-6">
+                      <p className="text-white/60 text-xs uppercase tracking-widest mb-1">Starting from</p>
+                      <p className="font-serif text-4xl font-bold text-white">{bus.price}</p>
+                      <a
+                        href={waUrl(`Hi, I'm interested in the ${bus.name}.`)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block mt-4 bg-white/20 hover:bg-white/30 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-colors"
+                      >
+                        Enquire Now
+                      </a>
+                    </div>
                   </div>
                 </div>
 
@@ -262,7 +254,9 @@ export default function FleetPage() {
                       <p className="text-sm text-gray-600 leading-relaxed">{bus.routes}</p>
                       <div className="mt-4 p-3 bg-emerald-50 rounded-xl border border-emerald-100">
                         <p className="text-xs text-emerald-700 font-medium">All buses include</p>
-                        <p className="text-xs text-emerald-600 mt-1">GPS tracking · English-speaking driver · 24/7 WhatsApp support · Comprehensive insurance</p>
+                        <p className="text-xs text-emerald-600 mt-1">
+                          GPS live tracking · Individual seat fan back-up · Mobile charging sockets · Water bottles · Blankets · 24/7 WhatsApp support
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -277,7 +271,7 @@ export default function FleetPage() {
       <section className="py-16 bg-emerald-700">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="font-serif text-3xl font-bold text-white mb-4">Not sure which bus fits your group?</h2>
-          <p className="text-emerald-100 mb-8">Tell us your group size and travel dates — we'll recommend the perfect vehicle and provide a custom quote.</p>
+          <p className="text-emerald-100 mb-8">Tell us your group size and travel dates, we'll recommend the perfect vehicle and provide a custom quote.</p>
           <a
             href={WA}
             target="_blank"
@@ -291,6 +285,7 @@ export default function FleetPage() {
           </a>
         </div>
       </section>
+      <Footer />
     </main>
   )
 }
