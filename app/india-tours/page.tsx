@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import JsonLd from '@/components/JsonLd'
 import { SITE, waUrl } from '@/lib/site'
 import { orgSchema, indiaTourListSchema } from '@/lib/schema'
@@ -9,7 +10,7 @@ const PAGE_URL = `${SITE.url}/india-tours`
 export const metadata: Metadata = {
   title: 'All India Tour Packages by Private Luxury Bus | ShivShakti Tourist',
   description:
-    'Golden Triangle, Himalayan Explorer, Spiritual India and more — private luxury bus tours across all of India from ₹22,000 per person. Custom multi-city itineraries available.',
+    'Golden Triangle, Himalayan Explorer, Spiritual India and more: private luxury bus tours across all of India from ₹22,000 per person. Custom multi-city itineraries available.',
   keywords: [
     'Golden Triangle bus tour',
     'India tour by private bus',
@@ -19,16 +20,16 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: 'All India Tours by Private Bus — ShivShakti Tourist, Udaipur',
+    title: 'All India Tours by Private Bus | ShivShakti Tourist, Udaipur',
     description:
-      'From the Taj Mahal to Kerala backwaters — travel India by private luxury bus. 6 handcrafted multi-city packages from ₹22,000. Fully custom itineraries available.',
+      'From the Taj Mahal to Kerala backwaters: travel India by private luxury bus. 6 handcrafted multi-city packages from ₹22,000. Fully custom itineraries available.',
     url: PAGE_URL,
     type: 'website',
     siteName: SITE.name,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'All India Tour Packages by Private Bus — ShivShakti Tourist',
+    title: 'All India Tour Packages by Private Bus | ShivShakti Tourist',
     description:
       'Golden Triangle, Himalayas, Spiritual India and more. 6 packages from ₹22,000. Custom itineraries available.',
   },
@@ -40,7 +41,7 @@ interface IndiaTour {
   title: string
   duration: string
   price: string
-  priceUSD: string | null // TODO: add USD equivalent before going live
+  priceUSD: string | null
   route: string
   gradient: string
   tag: string
@@ -53,29 +54,29 @@ const packages: IndiaTour[] = [
     title: 'Golden Triangle',
     duration: '6 Days / 5 Nights',
     price: '₹22,000',
-    priceUSD: null, // TODO: e.g. '$265'
+    priceUSD: '$265',
     route: 'Delhi → Agra → Jaipur → Delhi',
     gradient: 'from-amber-500 to-orange-600',
     tag: 'Classic',
     highlights: ['Taj Mahal sunrise visit', 'Qutub Minar & India Gate', 'Amber Fort jeep ride', 'Delhi Street Food Tour', 'Fatehpur Sikri visit'],
-    desc: "India's most iconic circuit — the three crown jewels of North India connected by our luxury coach.",
+    desc: "India's most iconic circuit: the three crown jewels of North India connected by our luxury coach.",
   },
   {
     title: 'Golden Triangle + Udaipur',
     duration: '8 Days / 7 Nights',
     price: '₹32,000',
-    priceUSD: null, // TODO: e.g. '$390'
+    priceUSD: '$390',
     route: 'Delhi → Agra → Jaipur → Udaipur → Delhi',
     gradient: 'from-teal-600 to-emerald-700',
     tag: 'Most Popular',
     highlights: ['All Golden Triangle sites', 'City Palace Udaipur', 'Lake Pichola sunset cruise', 'Kumbhalgarh day trip', 'Jagdish Temple & bazaar'],
-    desc: 'The classic triangle extended with the "Venice of the East" — a perfect introduction to royal Rajasthan.',
+    desc: 'The classic triangle extended with the "Venice of the East," a perfect introduction to royal Rajasthan.',
   },
   {
     title: 'North India Heritage',
     duration: '12 Days / 11 Nights',
     price: '₹45,000',
-    priceUSD: null, // TODO: e.g. '$545'
+    priceUSD: '$545',
     route: 'Delhi → Amritsar → Shimla → Agra → Varanasi → Delhi',
     gradient: 'from-violet-600 to-purple-800',
     tag: 'Comprehensive',
@@ -86,7 +87,7 @@ const packages: IndiaTour[] = [
     title: 'Spiritual India',
     duration: '10 Days / 9 Nights',
     price: '₹38,000',
-    priceUSD: null, // TODO: e.g. '$460'
+    priceUSD: '$460',
     route: 'Delhi → Rishikesh → Haridwar → Varanasi → Bodh Gaya → Delhi',
     gradient: 'from-orange-600 to-rose-700',
     tag: 'Spiritual',
@@ -97,23 +98,23 @@ const packages: IndiaTour[] = [
     title: 'Himalayan Explorer',
     duration: '14 Days / 13 Nights',
     price: '₹52,000',
-    priceUSD: null, // TODO: e.g. '$630'
+    priceUSD: '$630',
     route: 'Delhi → Manali → Leh → Nubra → Pangong → Delhi',
     gradient: 'from-slate-600 to-blue-800',
     tag: 'Adventure',
     highlights: ['Rohtang Pass & Solang Valley', 'Leh Palace & Shanti Stupa', 'Nubra Valley camel safari', 'Pangong Lake at sunrise', "Khardung La (world's highest motorable road)", 'Tibetan monastery stays'],
-    desc: "One of India's most dramatic road journeys — through high-altitude passes, lunar landscapes and turquoise lakes.",
+    desc: "One of India's most dramatic road journeys, through high-altitude passes, lunar landscapes and turquoise lakes.",
   },
   {
     title: 'India Grand Odyssey',
     duration: '21 Days / 20 Nights',
     price: '₹95,000',
-    priceUSD: null, // TODO: e.g. '$1,150'
+    priceUSD: '$1,150',
     route: 'Delhi → Rajasthan → Mumbai → Goa → Kerala',
     gradient: 'from-emerald-700 to-emerald-950',
     tag: 'Grand Tour',
     highlights: ['Complete Rajasthan circuit', 'Gateway of India Mumbai', 'Goa beaches & colonial old city', 'Kerala backwaters houseboat', 'Munnar tea plantations', 'Periyar wildlife sanctuary'],
-    desc: "Three extraordinary weeks covering India's history, deserts, coasts and jungles — the ultimate Grand Tour.",
+    desc: "Three extraordinary weeks covering India's history, deserts, coasts and jungles: the ultimate Grand Tour.",
   },
 ]
 
@@ -145,7 +146,7 @@ export default function IndiaToursPage() {
           <p className="text-violet-400 font-semibold text-sm tracking-widest uppercase mb-3">28 States · One Bus</p>
           <h1 className="font-serif text-5xl lg:text-6xl font-bold text-white mb-4">All India Tours</h1>
           <p className="text-violet-200 text-lg max-w-2xl mx-auto">
-            Journey beyond Rajasthan — our luxury coaches cover the length and breadth of India, from Himalayan passes to Kerala's backwaters.
+            Journey beyond Rajasthan: our luxury coaches cover the length and breadth of India, from Himalayan passes to Kerala's backwaters.
           </p>
         </div>
       </section>
@@ -240,6 +241,7 @@ export default function IndiaToursPage() {
           </a>
         </div>
       </section>
+      <Footer />
     </main>
   )
 }

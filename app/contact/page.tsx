@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import { SITE, waUrl } from '@/lib/site'
 import {
   validateContact,
@@ -212,7 +213,7 @@ export default function ContactPage() {
           <h1 className="font-serif text-5xl lg:text-6xl font-bold text-white mb-4">Contact Us</h1>
           <p className="text-emerald-200 text-lg max-w-xl mx-auto">
             Send us your travel details and receive a personalised itinerary with full pricing
-            within {SITE.response.email} — any time of day.
+            within {SITE.response.email}, any time of day.
           </p>
         </div>
       </section>
@@ -343,7 +344,7 @@ export default function ContactPage() {
                   {/* Response-time promise */}
                   <div className="flex items-center gap-2 text-xs text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-lg px-3 py-2 mb-7 w-fit">
                     <span aria-hidden="true">⚡</span>
-                    We reply within <strong>{SITE.response.email}</strong> — or {SITE.response.whatsapp} on WhatsApp
+                    We reply within <strong>{SITE.response.email}</strong>, or {SITE.response.whatsapp} on WhatsApp
                   </div>
 
                   {/* Server-level error banner */}
@@ -374,7 +375,7 @@ export default function ContactPage() {
 
                   <form ref={formRef} onSubmit={handleSubmit} noValidate className="space-y-5">
 
-                    {/* Honeypot — invisible to humans, checked server-side */}
+                    {/* Honeypot: invisible to humans, checked server-side */}
                     <div className="absolute -left-[9999px] top-0 w-px h-px overflow-hidden opacity-0" aria-hidden="true">
                       <label htmlFor="hp-website">Website</label>
                       <input
@@ -436,7 +437,7 @@ export default function ContactPage() {
                           className={inputCls(!!fieldErrors.email)}
                         />
                       </Field>
-                      <Field id="whatsapp" label="WhatsApp Number" hint="Optional — for quick back-and-forth.">
+                      <Field id="whatsapp" label="WhatsApp Number" hint="Optional, for quick back-and-forth.">
                         <input
                           id="whatsapp"
                           type="tel"
@@ -452,7 +453,7 @@ export default function ContactPage() {
 
                     {/* Row 3: travel date + group size */}
                     <div className="grid sm:grid-cols-2 gap-5">
-                      <Field id="travelDate" label="Approximate Travel Date" hint="Rough dates are fine — we can be flexible.">
+                      <Field id="travelDate" label="Approximate Travel Date" hint="Rough dates are fine, we can be flexible.">
                         <input
                           id="travelDate"
                           type="date"
@@ -545,6 +546,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+      <Footer />
     </main>
   )
 }

@@ -28,7 +28,7 @@ function useIsTouchDevice(): boolean {
   return touch
 }
 
-// ── Bus visual — "cutout" mode ────────────────────────────────────────────────
+// ── Bus visual: "cutout" mode ────────────────────────────────────────────────
 // Used once SITE.hero.busImageMode is a background-removed PNG. Floats over the
 // panel with mouse-parallax tilt, an idle bob, a glow, and a ground shadow.
 
@@ -73,7 +73,7 @@ function BusCutoutVisual() {
       className="order-1 lg:order-2 h-[380px] sm:h-[460px] lg:h-[540px] rounded-2xl overflow-hidden ring-1 ring-emerald-500/30 shadow-2xl shadow-emerald-900/60 relative bg-gradient-to-br from-emerald-950 via-emerald-900 to-emerald-800"
       style={{ perspective: '1200px' }}
     >
-      {/* Radial glow behind the bus — separates the dark vehicle from the dark panel */}
+      {/* Radial glow behind the bus: separates the dark vehicle from the dark panel */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
         <div className="w-[75%] h-[75%] rounded-full bg-[radial-gradient(closest-side,rgba(209,250,229,0.35),rgba(5,150,105,0.14)_60%,transparent_80%)] blur-2xl" />
       </div>
@@ -112,7 +112,7 @@ function BusCutoutVisual() {
   )
 }
 
-// ── Bus visual — "photo" mode ─────────────────────────────────────────────────
+// ── Bus visual: "photo" mode ─────────────────────────────────────────────────
 // Used while the source image still has its original street background. Rendered
 // full-bleed behind the whole hero with an emerald scrim + a slow Ken Burns zoom.
 
@@ -132,7 +132,7 @@ function BusPhotoBackground() {
           className="w-full h-full object-cover object-center"
         />
       </div>
-      {/* Scrim — keeps the headline legible over the photo */}
+      {/* Scrim: keeps the headline legible over the photo */}
       <div className="absolute inset-0 bg-gradient-to-r from-emerald-950 via-emerald-950/85 to-emerald-950/45" />
       <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-transparent to-emerald-950/50" />
     </div>
@@ -186,7 +186,7 @@ export default function HeroSection() {
             </h1>
             <p className="text-emerald-200 text-lg leading-relaxed mb-8 max-w-lg">
               GPS-tracked luxury buses, English-speaking drivers, and expertly crafted
-              itineraries across Rajasthan and all of India — tailored for discerning
+              itineraries across Rajasthan and all of India, tailored for discerning
               international travellers.
             </p>
 
@@ -221,7 +221,7 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* ── Bus visual — only in cutout mode; photo mode is the section background ── */}
+          {/* ── Bus visual: only in cutout mode; photo mode is the section background ── */}
           {!isPhotoMode && <BusCutoutVisual />}
         </div>
       </div>

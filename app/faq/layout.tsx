@@ -4,7 +4,7 @@ import { SITE } from '@/lib/site'
 const PAGE_URL = `${SITE.url}/faq`
 
 export const metadata: Metadata = {
-  title: 'FAQ — Is India Road Travel Safe? Booking, Payments & More',
+  title: 'FAQ: Is India Road Travel Safe? Booking, Payments & More',
   description:
     `Honest answers to the questions international travellers ask most before booking with ${SITE.name}: safety, commissions, solo travel, payment, and what's included.`,
   keywords: [
@@ -16,16 +16,16 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: 'Frequently Asked Questions — ShivShakti Tourist',
+    title: 'Frequently Asked Questions | ShivShakti Tourist',
     description:
-      `Plain answers on safety, booking, and what's included — so you can book with confidence. No commissions, no hidden costs, no surprises.`,
+      `Plain answers on safety, booking, and what's included, so you can book with confidence. No commissions, no hidden costs, no surprises.`,
     url: PAGE_URL,
     type: 'website',
     siteName: SITE.name,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'FAQ — ShivShakti Tourist',
+    title: 'FAQ | ShivShakti Tourist',
     description: 'Honest answers on safety, commissions, booking, and travel logistics for international visitors.',
   },
 }

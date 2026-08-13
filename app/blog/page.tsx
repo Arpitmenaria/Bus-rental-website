@@ -1,15 +1,16 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import { SITE } from '@/lib/site'
 import { blogPosts, categoryColors } from '@/lib/blog-posts'
 
 const PAGE_URL = `${SITE.url}/blog`
 
 export const metadata: Metadata = {
-  title: 'Travel Blog — Rajasthan & India Road Trip Guides | ShivShakti Tourist',
+  title: 'Travel Blog: Rajasthan & India Road Trip Guides | ShivShakti Tourist',
   description:
-    'Expert guides for international travellers exploring Rajasthan and India by road — safety tips, seasonal planning, route itineraries, and packing checklists.',
+    'Expert guides for international travellers exploring Rajasthan and India by road: safety tips, seasonal planning, route itineraries, and packing checklists.',
   keywords: [
     'Rajasthan travel blog',
     'India road trip guide',
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: 'Travel Blog — Rajasthan & India Road Trip Guides',
+    title: 'Travel Blog: Rajasthan & India Road Trip Guides',
     description:
       'Route itineraries, safety guides, seasonal planning tips and packing lists for international travellers exploring Rajasthan and India by private bus.',
     url: PAGE_URL,
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Travel Blog — Rajasthan & India Road Trip Guides | ShivShakti Tourist',
+    title: 'Travel Blog: Rajasthan & India Road Trip Guides | ShivShakti Tourist',
     description:
       'Expert guides for international travellers planning a Rajasthan or India road trip.',
   },
@@ -54,7 +55,7 @@ export default function BlogIndexPage() {
           </h1>
           <p className="text-emerald-200 text-lg max-w-2xl mx-auto">
             Honest, practical guides for international travellers exploring Rajasthan and India
-            by private bus — from the team that drives these roads every day.
+            by private bus, from the team that drives these roads every day.
           </p>
         </div>
       </section>
@@ -68,7 +69,7 @@ export default function BlogIndexPage() {
           >
             {/* Placeholder image slot */}
             <div className="bg-gradient-to-br from-emerald-700 to-emerald-950 rounded-xl aspect-[16/9] flex items-center justify-center">
-              {/* TODO: Replace with next/image once you have a real hero photo */}
+              {/* Replace with next/image once a real hero photo is available */}
               <span className="text-emerald-300 text-sm font-medium">📸 Photo coming soon</span>
             </div>
             <div>
@@ -119,7 +120,7 @@ export default function BlogIndexPage() {
               >
                 {/* Placeholder image */}
                 <div className="bg-gradient-to-br from-emerald-800 to-emerald-950 aspect-[16/9] flex items-center justify-center">
-                  {/* TODO: Replace with next/image */}
+                  {/* Replace with next/image once a real photo is available */}
                   <span className="text-emerald-400 text-xs">📸 Photo coming soon</span>
                 </div>
                 <div className="p-5">
@@ -156,7 +157,7 @@ export default function BlogIndexPage() {
             Ready to Plan Your Trip?
           </h2>
           <p className="text-emerald-300 mb-8">
-            Our guides are a start — but nothing beats a personalised itinerary built around
+            Our guides are a start, but nothing beats a personalised itinerary built around
             your dates, group and interests.
           </p>
           <Link
@@ -167,6 +168,7 @@ export default function BlogIndexPage() {
           </Link>
         </div>
       </section>
+      <Footer />
     </main>
   )
 }

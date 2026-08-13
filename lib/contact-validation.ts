@@ -19,7 +19,7 @@ export interface ContactPayload {
   travelDate: string
   groupSize: string
   description: string
-  /** Honeypot — must be empty. Present in client form, checked server-side. */
+  /** Honeypot: must be empty. Present in client form, checked server-side. */
   honeypot: string
 }
 
@@ -49,7 +49,7 @@ export function validateContact(data: ContactPayload): FieldErrors {
   if (!desc) errors.description = 'Please tell us a little about your trip.'
   else if (desc.length < 10) errors.description = 'Please add a bit more detail (at least 10 characters).'
   else if (desc.length > 2000)
-    errors.description = `Too long — please keep it under 2,000 characters (currently ${desc.length}).`
+    errors.description = `Too long: please keep it under 2,000 characters (currently ${desc.length}).`
 
   if (data.groupSize && !(GROUP_SIZES as readonly string[]).includes(data.groupSize))
     errors.groupSize = 'Please select a valid group size.'

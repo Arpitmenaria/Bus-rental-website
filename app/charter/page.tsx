@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 import JsonLd from '@/components/JsonLd'
 import { SITE, waUrl } from '@/lib/site'
 import { orgSchema } from '@/lib/schema'
@@ -7,7 +8,7 @@ import { orgSchema } from '@/lib/schema'
 const PAGE_URL = `${SITE.url}/charter`
 
 export const metadata: Metadata = {
-  title: 'Private Bus Charter Rajasthan — Weddings, Corporate, Groups | ShivShakti Tourist',
+  title: 'Private Bus Charter Rajasthan: Weddings, Corporate, Groups | ShivShakti Tourist',
   description:
     'Private bus charter across Rajasthan and India for weddings, corporate groups, airport transfers and educational tours. Dedicated bus, driver and coordinator. Custom quotes in 2 hours.',
   keywords: [
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: PAGE_URL },
   openGraph: {
-    title: 'Private Bus Charter for Any Occasion — ShivShakti Tourist, Rajasthan',
+    title: 'Private Bus Charter for Any Occasion | ShivShakti Tourist, Rajasthan',
     description:
       'Wedding processions, corporate charters, airport transfers, yoga retreats and film shoots. Dedicated bus, driver and on-board coordinator. Transparent pricing from ₹10/km.',
     url: PAGE_URL,
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Private Bus Charter — ShivShakti Tourist, Udaipur Rajasthan',
+    title: 'Private Bus Charter | ShivShakti Tourist, Udaipur Rajasthan',
     description:
       'Weddings, corporate groups, educational tours and more. Your bus, your schedule. Custom quotes in 2 hours.',
   },
@@ -40,7 +41,7 @@ const charterTypes = [
   {
     icon: '💍',
     title: 'Wedding & Baraat',
-    desc: 'Make your baraat procession legendary. Our floral-decorated luxury coaches carry wedding guests in royal style — with music, lighting, and a professional coordinator.',
+    desc: 'Make your baraat procession legendary. Our floral-decorated luxury coaches carry wedding guests in royal style, with music, lighting, and a professional coordinator.',
     features: ['Custom floral decoration', 'Festive lighting & LED strips', 'Sound system & DJ ready', 'Co-ordinator on board', 'Multiple bus options'],
     price: 'From ₹35,000/day',
     gradient: 'from-rose-50 to-pink-50',
@@ -193,7 +194,7 @@ export default function CharterPage() {
             Tell Us What You Need
           </h2>
           <p className="text-violet-200 text-lg mb-8 max-w-xl mx-auto">
-            Every charter is unique. Share your requirements and we'll build a solution that fits — within your budget, on your timeline.
+            Every charter is unique. Share your requirements and we'll build a solution that fits, within your budget, on your timeline.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -216,6 +217,7 @@ export default function CharterPage() {
           </div>
         </div>
       </section>
+      <Footer />
     </main>
   )
 }

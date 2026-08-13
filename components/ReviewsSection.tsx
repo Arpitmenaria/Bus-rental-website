@@ -53,22 +53,10 @@ export default function ReviewsSection({ includeJsonLd = true }: { includeJsonLd
             </div>
 
             <div className="p-6">
-              {/* ── TODO: Paste your Google review widget here ──
-                  Options:
-                  A) Link to your Google Business listing:
-                     <a href={SITE.reviews.googleUrl} target="_blank" rel="noopener noreferrer">
-                       Read all {SITE.stats.reviewCount}+ reviews on Google →
-                     </a>
-                  B) Embed a third-party widget (e.g. Elfsight Google Reviews, Reviewsonmywebsite).
-                     Paste their <script> tag here and mark this component 'use client'.
-                  C) Use the Google Places API to fetch & render reviews server-side.
-              */}
+              {/* Once reviews.googleUrl is set in lib/site.ts, this links straight out.
+                  To embed reviews directly, swap in the Google Places API or a widget
+                  like Elfsight and mark this component 'use client'. */}
               <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
-                <p className="text-emerald-800 font-semibold mb-1">Google Reviews Widget</p>
-                <p className="text-emerald-600 text-sm mb-4">
-                  Add your Google Business Place ID to <code className="bg-emerald-100 px-1 rounded text-xs">lib/site.ts</code> →{' '}
-                  <code className="bg-emerald-100 px-1 rounded text-xs">reviews.googleUrl</code>
-                </p>
                 {googleUrl ? (
                   <a
                     href={googleUrl}
@@ -79,7 +67,9 @@ export default function ReviewsSection({ includeJsonLd = true }: { includeJsonLd
                     Read our Google Reviews →
                   </a>
                 ) : (
-                  <p className="text-amber-600 text-xs font-mono">[TODO: set reviews.googleUrl in lib/site.ts]</p>
+                  <p className="text-emerald-700 text-sm">
+                    Reviews coming soon, ask us for guest references directly.
+                  </p>
                 )}
               </div>
             </div>
@@ -96,19 +86,10 @@ export default function ReviewsSection({ includeJsonLd = true }: { includeJsonLd
             </div>
 
             <div className="p-6">
-              {/* ── TODO: Paste your TripAdvisor widget here ──
-                  1. Go to tripadvisor.com/Widgets
-                  2. Select your property and choose a widget type
-                  3. Copy the embed code and paste it below
-                  4. If the widget needs JavaScript, add 'use client' at the top of this file
-                  Alternatively, just link to your TripAdvisor listing via reviews.tripAdvisorUrl.
-              */}
+              {/* Once reviews.tripAdvisorUrl is set in lib/site.ts, this links straight out.
+                  To embed a widget, get the code from tripadvisor.com/Widgets and mark
+                  this component 'use client'. */}
               <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-5 text-center">
-                <p className="text-emerald-800 font-semibold mb-1">TripAdvisor Widget</p>
-                <p className="text-emerald-600 text-sm mb-4">
-                  Set <code className="bg-emerald-100 px-1 rounded text-xs">reviews.tripAdvisorUrl</code> in{' '}
-                  <code className="bg-emerald-100 px-1 rounded text-xs">lib/site.ts</code>, or paste the widget HTML here.
-                </p>
                 {tripAdvisorUrl ? (
                   <a
                     href={tripAdvisorUrl}
@@ -119,7 +100,9 @@ export default function ReviewsSection({ includeJsonLd = true }: { includeJsonLd
                     Read our TripAdvisor Reviews →
                   </a>
                 ) : (
-                  <p className="text-amber-600 text-xs font-mono">[TODO: set reviews.tripAdvisorUrl in lib/site.ts]</p>
+                  <p className="text-emerald-700 text-sm">
+                    Reviews coming soon, ask us for guest references directly.
+                  </p>
                 )}
               </div>
             </div>
